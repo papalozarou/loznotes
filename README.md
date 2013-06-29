@@ -3,8 +3,13 @@ metaframe
 
 Metaframe is an easy-to-use notation layer for conveying the meta-knowledge in wireframes, mockups, and design comps. Made and shared with love by the folks at Elliance.
 
+##About this fork
+The original tab handle/button and markers were too big for my usage needs, so this fork addresses that as well as stripping the reset and converting the CSS to LESS.
+
 ##Installation
-To install, simply reference the CSS and JS files in this package from your wireframe page HTML. The CSS contains a reset (compass reset) in addition to the note styles. Reference "metaframe.css" inside document's head and "metaframe-[version].js" immediately before the close of the body. The example.html file in this package shows you how it's done.
+To install, simply reference the CSS and JS files in this package from your wireframe page HTML. Reference "metaframe.css" inside document's head and "metaframe-[version].js" immediately before the close of the body. The example.html file in this package shows you how it's done.
+
+**N.B.** This does not include a CSS reset – this has been seperated out.
 
 ##Use
 Get ready because this is stupid simple. For the element you want to notate, add the following attributes to the HTML tag:
