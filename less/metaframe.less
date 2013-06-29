@@ -1,0 +1,168 @@
+// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+// Table of contents
+// --------------------------------------------------
+// 1.0 imports
+// 2.0 variables
+// 3.0 general
+// 4.0 type
+// 5.0 layout
+// 6.0 modules
+// -------------------------------------------------------------------------------------------------------------------------------------------------  
+
+// 1.0 imports
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+@import "library.less";
+@import "breakpoints.less";
+
+// 2.0 variables
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+@brand-color:#6b2323;
+
+// 3.0 general
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+
+// 4.0 type
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+.notes-anchor {
+	figure {
+		.font-size(14,32);
+		font-family:@sans-serif;
+		font-weight:bold;
+		color:#fff;
+		text-align:center;
+	}
+}
+
+.notes {
+	h1, h2, .note-count, .note-body, form {
+		font-family:@sans-serif;
+		font-weight:normal;
+		color:#fff;		
+	}
+	h1 {
+		.font-size(27,36);
+		.margin-bottom(36);
+		background:none;
+	}
+
+	h2 {
+		.font-size(21,24);
+		.margin-bottom(10);
+		background:none;
+	}
+	form {
+		.font-size(14,20);
+	}
+}
+
+.note-count {
+	.font-size(14,32);
+	font-weight:bold;
+	text-align:center;
+}
+
+.note-body {
+	.font-size(14,20);
+}
+
+// 5.0 layout
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// 6.0 modules
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+.hide {
+	display:none;
+}
+
+.notes-anchor, .note-count {
+	@color:rgba(0,0,0,.35);
+	display:block;
+	width:32px;
+	height:32px;
+	z-index:95;
+	background:@brand-color;
+	.radius(16);
+	cursor:pointer;
+	.shadow(0px,2px,3px,@color);
+	.box-sizing;
+}
+
+.notes-anchor {
+	position:absolute;
+	.margin(-8,0,0,-8);
+}
+
+.notes, .notes-tab {
+	position:fixed;
+	z-index:100;
+}
+
+.notes {
+	top:0;
+	right:-336px;
+	width:340px;
+	height:100%;
+	.padding(16,16,16,16);
+	background:#000;
+	border-left:4px solid @brand-color;
+	opacity:.90;
+	overflow:auto;
+	.box-sizing;
+	form {
+		.margin-bottom(20);
+	}
+	@media (max-width:@medium) {
+		top:auto;
+		right:auto;
+		bottom:-336px;
+		width:100%;
+		max-width:100%;
+		height:340px;
+		border:none;
+		border-top:4px solid @brand-color;
+		overflow:auto;
+		.box-sizing;
+	}
+}
+
+.notes-tab {
+	@radius:3;
+	top:50%;
+	right:4px;
+	width:17px;
+	height:32px;
+	.margin-top(-16);
+    background:url(../img/notes-v.png) center center no-repeat @brand-color;
+	.radius(@radius,0,0,@radius);
+	opacity:.90;
+	@media (max-width:@medium) {
+		top:auto;
+		right:auto;
+		bottom:4px;
+		left:50%;
+		width:32px;
+		height:24px;
+		margin-left:-16px;
+	    background:url(../img/notes-h.png) center center no-repeat @brand-color;	
+		.radius(@radius,@radius,0,0);	
+	}
+}
+
+#noteBox {
+	margin-right:5px;
+}
+
+.note-holder {
+	.margin-bottom(24);
+}
+
+.note-count {
+	float:left;
+	display:block;
+}
+
+.note-body {
+	display:block;
+	padding-left:44px;
+}
