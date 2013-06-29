@@ -1,0 +1,10 @@
+.clear-fix:before,.clear-fix:after{content:"";display:table;}
+.clear-fix:after{clear:both;}
+.clear-clear-fix:before,.clear-clear-fix:after{clear:none;content:none;display:none;}
+br:last-child{clear:both;}
+*{margin:0;padding:0;border:none;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+html{font-size:62.5%;color:#333333;}
+.accessibility{display:none;}
+main,header,hgroup,nav,section,article,aside,figure,figcaption,details,summary,footer,legend{display:block;}
+img{max-width:100%;}
+body{font-family:Helmet,Freesans,sans-serif;color:#333333;text-rendering:optimizeLegibility;}
