@@ -6,7 +6,7 @@ Metaframe is an easy-to-use notation layer for conveying the meta-knowledge in w
 ##About this fork
 The original tab handle/button and markers were too big for my usage needs, so this fork addresses that as well as stripping the reset and converting the CSS to LESS.
 
-Also converted to using [data-notation] instead of a class ('.notation') and attribute ([note]).
+The usage has been converted to a data attribute ([data-notation]) instead of a class ('.notation') and attribute ([note]). As part of that work the Javascript/JQuery has been re-written.
 
 ##Installation
 To install, simply reference the CSS and JS files in this package from your wireframe page HTML. Reference "metaframe.css" inside document's head and "metaframe.js" immediately before the close of the body. The index.html file in this package shows you how it's done.
@@ -29,13 +29,20 @@ The enclosed index file provides an example of usage. At a later date, when I st
 ##How it works
 Metaframe.js looks through the DOM to find elements with a [data-notation] attribute, then creates a tab containing each of these notations.
 
+##Browser support
+This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 and above in PC land.
+
+On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, both Chrome and Browser. It works of a fashion in the Android 3.2 browser.
+
+You're milage may vary considerably in other browsers.
+
 ##Known Issues
-This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and on iOS 5-7, Mobile Safari – you're milage may vary considerably in other browsers.
 
-Main issues:
+There's shouldn't be too many, apart from:
 
-* Adding [data-notation] to <img> elements will not work at present.
-* On Android 4.x.x Chrome browser, the pane has slight CSS issues.
+* Adding [data-notation] to <img> elements will not work.
+* On a Nexus 7, running Android 4.x.x Chrome browser, the pane has slight CSS issues.
 
+Any more let me know.
 
 ######©2013 Loz Gray - Creative Commons Attribution Sharealike 3.0 Unported http://creativecommons.org/licenses/by-sa/3.0/
