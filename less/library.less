@@ -1,0 +1,436 @@
+// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+// Table of contents
+// --------------------------------------------------
+// 1.0 imports & file paths
+// 2.0 mixins
+// 		2.1 general
+//		2.2 links
+//		2.3 position
+//		2.4 width and height
+//		2.5 margin and padding
+//		2.6 fonts
+//		2.7 background and shadows
+//		2.8 borders
+//		2.9 image replacement
+// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+// 1.0 imports & file paths
+// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+	@import "colors.less";
+	@import "fonts.less";
+	@image-path:"../img/";
+	
+// 2.0 mixins
+// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+	// 2.1 general
+	// --------------------------------------------------
+	.reset() {
+		margin:0;
+		padding:0;
+		border:none;
+	}
+	
+	.bootstrap() {
+		* {
+			.reset;
+			-webkit-text-size-adjust:100%;
+			-ms-text-size-adjust:100%;
+		}
+
+		html {
+			font-size:62.5%; 
+			color:@copy;
+		}
+		
+		.accessibility {
+			display:none;
+		}              
+
+		main, header, hgroup, nav, section, article, aside, figure, figcaption, details, summary, footer, legend {
+			display:block;
+		}
+                 
+		img {
+			max-width:100%;
+		}
+	}
+	
+	.clear-fix {
+		&:before, &:after {
+		    content:"";
+		    display:table;
+		}
+		&:after {
+		    clear:both;
+		}
+	}
+	
+	.clear-clear-fix {
+		&:before, &:after {
+			clear:none;
+		    content:none;
+			display:none;
+		}
+	}
+	
+	br:last-child {
+		clear:both;
+	}
+	
+	.box-sizing(@value:border-box) {
+		-webkit-box-sizing:@value;
+		-moz-box-sizing:@value;
+		box-sizing:@value;	
+	}	
+	
+	// 2.2 links	
+	// --------------------------------------------------
+	.links(@link) {
+		@link-hover:darken(@link,10%);
+		@link-visited:lighten(@link,10%);
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover {
+				color:@link-hover;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}
+	
+	.links(@link,@link-hover,@link-visited) {
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover, &:visited:hover {
+				color:@link-hover;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}
+	
+	.links(yes,@link) {
+		@link-hover:darken(@link,10%);
+		@link-visited:lighten(@link,10%);
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover {
+				color:@link-hover;
+				text-decoration:underline;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}
+	
+	.links(yes,@link,@link-hover,@link-visited) {
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover {
+				color:@link-hover;
+				text-decoration:underline;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}
+	
+	.links(no,@link) {
+		@link-hover:darken(@link,10%);
+		@link-visited:lighten(@link,10%);
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover {
+				color:@link-hover;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}	
+	
+	.links(no,@link,@link-hover,@link-visited) {
+		a {
+			color:@link;
+			text-decoration:none;
+			&:hover {
+				color:@link-hover;
+			}
+			&:visited {
+				color:@link-visited;
+			}
+		}
+	}
+	
+	// 2.3 position
+	// --------------------------------------------------
+	.top(@top) {
+		top:@top * 1px;
+		top:@top * .1rem;
+	}
+	
+	.right(@value,@context) {
+		@v:(@value / @context) * 100%;
+		right:@v;
+	}
+	
+	.bottom(@bottom) {
+		bottom:@bottom * 1px;
+		bottom:@bottom * .1rem;
+	}
+	
+	.left(@value,@context) {
+		@v:(@value / @context) * 100%;
+		right:@v;
+	}
+	
+	// 2.4 width and height
+	// --------------------------------------------------
+	.width(@width,@context) {
+		@w:(@width / @context) * 100%;
+		width:@w;
+		max-width:@w;
+	}
+	
+	.max-width(@width,@context) {
+		@w:(@width / @context) * 100%;
+		max-width:@w;
+	}
+
+	.min-height(@height) {
+		min-height:@height * 1px;
+		min-height:@height * .1rem;
+	} 
+
+	.height(@height) {
+		height:@height * 1px;
+		height:@height * .1rem;
+	} 
+
+	.max-height(@height) {
+		max-height:@height * 1px;
+		max-height:@height * .1rem;
+	} 
+	
+	// 2.5 margin and padding
+	// --------------------------------------------------
+	.margin(@value) {
+		@r:@value * 1px;
+		@l:@value * 1px;
+		margin:(@value * 1px) @r (@value * 1px) @l;
+		margin:(@value * .1rem) @r (@value * .1rem) @l;
+	}
+	
+	.margin(@top:0,@right:0,@bottom:0,@left:0) {
+		@r:@right * 1px;
+		@l:@left * 1px;
+		margin:(@top * 1px) @r (@bottom * 1px) @l;
+		margin:(@top * .1rem) @r (@bottom * .1rem) @l;
+	}                    
+
+	.margin(@top,@right,@bottom,@left,@context) {
+		@r:(@right / @context) * 100%;
+		@l:(@left / @context) * 100%;
+		margin:(@top * 1px) @r (@bottom * 1px) @l;
+		margin:(@top * .1rem) @r (@bottom * .1rem) @l;
+	}    
+	
+	.margin-top(@top:0) {
+		margin-top:@top * 1px;
+		margin-top:@top * .1rem;	
+	}
+
+	.margin-right(@value,@context) {
+		margin-right:(@value / @context) * 100%;
+	}
+
+	.margin-bottom(@bottom:0) {
+		margin-bottom:@bottom * 1px;
+		margin-bottom:@bottom * .1rem;	
+	}
+
+	.margin-left(@value,@context) {
+		margin-left:(@value / @context) * 100%;
+	}
+	
+	.padding(@value) {
+		@r:@value * 1px;
+		@l:@value * 1px;
+		padding:(@value * 1px) @r (@value * 1px) @l;
+		padding:(@value * .1rem) @r (@value * .1rem) @l;
+	}
+	
+	.padding(@top:0,@right:0,@bottom:0,@left:0) {
+		@r:@right * 1px;
+		@l:@left * 1px;
+		padding:(@top * 1px) @r (@bottom * 1px) @l;
+		padding:(@top * .1rem) @r (@bottom * .1rem) @l;
+	}                    
+
+	.padding(@top,@right,@bottom,@left,@context) {
+		@r:(@right / @context) * 100%;
+		@l:(@left / @context) * 100%;
+		padding:(@top * 1px) @r (@bottom * 1px) @l;
+		padding:(@top * .1rem) @r (@bottom * .1rem) @l;
+	}    
+	
+	.padding-top(@top:0) {
+		padding-top:@top * 1px;
+		padding-top:@top * .1rem;	
+	}
+
+	.padding-right(@value,@context) {
+		padding-right:(@value / @context) * 100%;
+	}
+
+	.padding-bottom(@bottom:0) {
+		padding-bottom:@bottom * 1px;
+		padding-bottom:@bottom * .1rem;	
+	}
+
+	.padding-left(@value,@context) {
+		padding-left:(@value / @context) * 100%;
+	}
+	
+	// 2.6 fonts
+	// --------------------------------------------------
+	.font-size(@size,@leading) {
+		font-size:@size * 1px;
+		font-size:@size * .1rem; 
+		line-height:@leading * 1px;
+		line-height:@leading * .1rem;	
+	}
+	
+	.font(@size,@leading,@family) {
+		@sp:@size * 1px;
+		@lp:@leading * 1px;
+		@sr:@size * .1rem;
+		@lr:@leading * .1rem;
+		font:@sp~"/"@lp @family;
+		font:@sr~"/"@lr @family;
+	}
+	
+	.font(@size,@leading,@weight,@style:normal) {
+		@sp:@size * 1px;
+		@lp:@leading * 1px;
+		@sr:@size * .1rem;
+		@lr:@leading * .1rem;
+		font:@style @weight @sp~"/"@lp @family;
+		font:@style @weight @sr~"/"@lr @family;
+	}
+	
+	.font(@size,@leading,@weight,@style:normal,@family) {
+		@sp:@size * 1px;
+		@lp:@leading * 1px;
+		@sr:@size * .1rem;
+		@lr:@leading * .1rem;
+		font:@style @weight @sp~"/"@lp @family;
+		font:@style @weight @sr~"/"@lr @family;
+	}
+	
+	.font-margin(@size,@leading) {
+		.font-size(@size,@leading);
+		.margin-bottom(@leading / 2);
+	}
+	
+	// 2.7 backgrounds and shadows
+	// --------------------------------------------------	
+	.shadow(@x:0,@y:1px,@blur:2px,@col:rgba(0,0,0,.2)) {
+		-moz-box-shadow: @arguments;
+		-webkit-box-shadow: @arguments;
+		box-shadow: @arguments;
+	} 
+	
+	.shadow-inset(@col:@light-grey,@x:0,@y:1px,@blur:2px) {
+		-moz-box-shadow:inset @arguments;
+		-webkit-box-shadow:inset @arguments;
+		box-shadow:inset @arguments;
+	} 
+	
+	.no-shadow() {
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	
+	.linear-gradient(@topCol,@bottomCol) {
+		background: @topCol; /* Old browsers */
+		background: -moz-linear-gradient(@topCol, @bottomCol); /* FF3.6+ */
+		background: -webkit-linear-gradient(@topCol, @bottomCol); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(@topCol, @bottomCol); /* Opera 11.10+ */
+		background: -ms-linear-gradient(@topCol, @bottomCol); /* IE10+ */
+		background: linear-gradient(@topCol, @bottomCol); /* W3C */
+	}
+
+	// 2.8 borders
+	// --------------------------------------------------
+	.radius(@radius) {
+		@value:@radius * 1px;
+		-moz-border-radius: @value;
+		-webkit-border-radius: @value;
+		border-radius: @value; /* IE, Opera, W3C */		
+	} 
+	
+	.radius(@top-left,@top-right,@bottom-right,@bottom-left) {
+		@tl:@top-left * 1px;
+		@tr:@top-right * 1px; 
+		@br:@bottom-right * 1px; 
+		@bl:@bottom-left * 1px;  
+		-moz-border-radius:@tl @tr @br @bl;
+		-webkit-border-radius:@tl @tr @br @bl;
+		border-radius:@tl @tr @br @bl; /* IE, Opera, W3C */		
+	}
+	
+	.no-radius() {
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0; /* IE, Opera, W3C */		
+	}
+	
+	// 2.9 image replacement
+	// --------------------------------------------------
+	.image-replace(no-link,@width,@height,@image) {
+		@wp:@width * 1px;
+		@hp:@height * 1px;
+		width:@wp;
+		height:@hp;
+		text-indent:-9999em;
+		overflow:hidden;
+		span {
+			display:block;
+			width:@wp;
+			height:@hp;
+			background:url('~"@{image-path}@{image}"') left top no-repeat;
+			background-size:@wp @hp;
+			border:none;
+		}
+	}	
+	
+	.image-replace(link,@width,@height,@image,@image-hover) {
+		@wp:@width * 1px;
+		@hp:@height * 1px;
+		width:@wp;
+		height:@hp;
+		text-indent:-9999em;
+		overflow:hidden;
+		a {
+			display:block;
+			width:@wp;
+			height:@hp;
+			background:url('@{image-path}@{image}') left top no-repeat;
+			background-size:@wp @hp;
+			border:none;
+			&:hover {
+				background-image:url('@{image-path}@{image-hover}');
+			}
+		}
+	}
