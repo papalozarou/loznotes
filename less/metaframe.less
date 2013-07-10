@@ -33,24 +33,33 @@
 	}
 }
 
-.notes {
+.notes-tab-pane {
 	h1, h2, .note-count, .note-body, form {
 		font-family:@sans-serif;
 		font-weight:normal;
-		color:#fff;		
+		color:#fff;	
 	}
 	h1 {
-		.font-size(27,36);
-		.margin-bottom(36);
+		.font-size(21,24);
+		.margin-bottom(12);
+		padding:0;
 		background:none;
+		@media (min-width:@medium) {
+			.font-size(27,36);
+			.margin-bottom(24);
+		}
 	}
 
 	h2 {
-		.font-size(21,24);
-		.margin-bottom(10);
+		.font-size(18,24);
+		.margin-bottom(12);
 		background:none;
+		@media (min-width:@medium) {
+			.font-size(21,24);
+			.margin-bottom(24);
+		}
 	}
-	form {
+	.form-notes-display {
 		.font-size(14,20);
 	}
 }
@@ -71,10 +80,6 @@
 
 // 6.0 modules
 // -------------------------------------------------------------------------------------------------------------------------------------------------
-.hide {
-	display:none;
-}
-
 .notes-anchor, .note-count {
 	@color:rgba(0,0,0,.35);
 	display:block;
@@ -93,68 +98,110 @@
 	.margin(-8,0,0,-8);
 }
 
-.notes, .notes-tab {
+.notes-tab-pane, .notes-tab-control {
 	position:fixed;
 	z-index:100;
 }
 
-.notes {
-	top:0;
-	right:-336px;
-	width:340px;
-	height:100%;
-	.padding(16,16,16,16);
+@transition-bottom:bottom .2s ease;
+@transition-right:right .2s ease;
+
+.notes-tab-control {
+	@radius:3;
+	top:auto;
+	right:auto;
+	bottom:4px;
+	left:50%;
+	width:32px;
+	height:24px;
+	margin-left:-16px;
+    background:url(../img/notes-h.png) center center no-repeat @brand-color;	
+	.radius(@radius,@radius,0,0);	
+	-webkit-transition:@transition-bottom;
+	-moz-transition:@transition-bottom;
+	transition:@transition-bottom;
+	&.is-open {
+		bottom:340px;
+	}
+	@media (min-width:@small-medium) {
+		&.is-open {
+			bottom:200px;
+		}
+	}
+	@media (min-width:@medium) {
+		top:50%;
+		right:4px;
+		bottom:auto;
+		left:auto;
+		width:17px;
+		height:32px;
+		.margin-top(-16);
+	    background:url(../img/notes-v.png) center center no-repeat @brand-color;
+		.radius(@radius,0,0,@radius);
+		opacity:.90;
+		-webkit-transition:@transition-right;
+		-moz-transition:@transition-right;
+		transition:@transition-right;
+		&.is-open {
+			right:340px;
+		}
+	}
+}
+
+.notes-tab-pane {
+	top:auto;
+	right:auto;
+	bottom:-336px;
+	width:100%;
+	max-width:100%;
+	height:340px;
 	background:#000;
-	border-left:4px solid @brand-color;
-	opacity:.90;
+	.padding(10,10,10,10);
+	border-top:4px solid @brand-color;
 	overflow:auto;
 	.box-sizing;
-	form {
-		.margin-bottom(20);
+	-webkit-transition:@transition-bottom;
+	-moz-transition:@transition-bottom;
+	transition:@transition-bottom;
+	&.is-open {
+		bottom:0;
 	}
-	@media (max-width:@medium) {
-		top:auto;
-		right:auto;
-		bottom:-336px;
-		width:100%;
-		max-width:100%;
-		height:340px;
+	@media (min-width:@small-medium) {
+		bottom:-196px;
+		height:200px;
+		&.is-open {
+			bottom:0;
+		}
+	}
+	@media (min-width:@medium) {
+		top:0;
+		right:-336px;
+		width:340px;
+		height:100%;
+		.padding(20,20,20,20);
 		border:none;
-		border-top:4px solid @brand-color;
+		border-left:4px solid @brand-color;
+		opacity:.90;
 		overflow:auto;
 		.box-sizing;
+		-webkit-transition:@transition-right;
+		-moz-transition:@transition-right;
+		transition:@transition-right;
+		&.is-open {
+			right:0;
+		}
 	}
 }
 
-.notes-tab {
-	@radius:3;
-	top:50%;
-	right:4px;
-	width:17px;
-	height:32px;
-	.margin-top(-16);
-    background:url(../img/notes-v.png) center center no-repeat @brand-color;
-	.radius(@radius,0,0,@radius);
-	opacity:.90;
-	@media (max-width:@medium) {
-		top:auto;
-		right:auto;
-		bottom:4px;
-		left:50%;
-		width:32px;
-		height:24px;
-		margin-left:-16px;
-	    background:url(../img/notes-h.png) center center no-repeat @brand-color;	
-		.radius(@radius,@radius,0,0);	
+.form-notes-display {
+	.margin-bottom(12);
+	@media (min-width:@medium) {
+		.margin-bottom(24);
 	}
 }
 
-#noteBox {
+#note-anchors-display-toggle {
 	margin-right:5px;
-}
-
-.note-holder {
-	.margin-bottom(24);
 }
 
 .note-count {
@@ -164,5 +211,10 @@
 
 .note-body {
 	display:block;
+	.margin-bottom(24);
 	padding-left:44px;
+}
+
+.notes-hide {
+	display:none;
 }
