@@ -69,7 +69,7 @@ $(function () {
 	});
 	
 	// hide substrings by default 
-	if (subStrings.length === 2 && subStrings[1] === 'hide') {
+	if (subStrings.length === 2 && subStrings[1] === 'hidden') {
 		$('#notes-anchors-display-toggle').removeAttr('type');
 		notesAnchors.addClass('notes-hide');
 	}
