@@ -8,6 +8,9 @@ $(function () {
 	var notesTabControl;
 	var notesTabPane;
 	
+	// defined here for ease
+	var title = $(this).attr('title');
+	
 	// get document URL and parse string from first '?' character, then split by '='
 	var subStrings = window.location.search.substring(1).split('=');
 	
@@ -23,7 +26,6 @@ $(function () {
 		notesTabPane = $('<section/>',{'class':'notes-tab-pane'}).appendTo('body');
 
 		// get page title and insert into notes panel
-		var title = $(this).attr('title');
 		notesTabPane.html('<h1>' + title + '</h1>');
 	
 		// generate notes panel static content and insert into notes panel
