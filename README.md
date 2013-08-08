@@ -37,6 +37,7 @@ A client recently asked me if it were possible to show some wireframes either wi
 
 To hide the note anchors by default:
 **?notation=hidden**
+**?notation=hide**
 
 To turn off note anchors and the notation pane completely:
 **?notation=off**
@@ -44,6 +45,7 @@ To turn off note anchors and the notation pane completely:
 Example usage:
 
 http://mydomain.com/mypage.html?notation=hidden – hides the note anchors by default
+http://mydomain.com/mypage.html?notation=hide – hides the note anchors by default
 
 or
 
@@ -51,7 +53,9 @@ http://mydomain.com/mypage.html?notation=off – removes the note anchors and no
 
 A URL without a switch provide note anchors and the notes pane as normal.
 
-**N.B.** The switches wont persist, so you'll need to add them to each URL.
+**N.B.**
+* The switches wont persist, so you'll need to add them to each URL.
+* You can use whatever you want between the '?' and the '=' – the jQuery only tests for the second part (the 'hidden'/'off' bit). So ?wireframe-notations=off would work as well.
 
 ##How it works
 loznotes.js looks scans the DOM for elements with a [data-notation] attribute, then creates a tab, with a title from the pages header, containing each of these notations.

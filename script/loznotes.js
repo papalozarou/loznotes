@@ -45,7 +45,7 @@ $(function () {
 	}
 	
 	// if no substring generate notes
-	if (subStrings.length === 1 || subStrings.length === 2 && subStrings[1] === 'hidden') {
+	if (subStrings.length <= 1 || subStrings[1] === 'hidden' || subStrings[1] === 'hide') {
 		initiate();
 		if (subStrings.length === 1) {
 			$('#note-anchors-display-toggle').attr('checked','checked');
@@ -69,7 +69,7 @@ $(function () {
 	});
 	
 	// hide substrings by default 
-	if (subStrings.length === 2 && subStrings[1] === 'hidden') {
+	if (subStrings[1] === 'hidden' || subStrings[1] === 'hide') {
 		$('#notes-anchors-display-toggle').removeAttr('type');
 		notesAnchors.addClass('notes-hide');
 	}
