@@ -1,4 +1,4 @@
-metaframe
+loznotes
 ==========
 
 loznotes is a notation layer for conveying information about wireframes, mockups, and design comps. Originally a fork, this now a complete rewrite of Elliance's Metaframe work (http://github.com/elliance/metaframe).
@@ -22,7 +22,7 @@ Reference "loznotes.css" inside document's head and "loznotes.js" immediately be
 ##Use
 For elements you want to notate, add the following data attribute: **data-notation="[your note here, but without brackets]"**
 
-Metaframe numbers notes automatically, so you only have to keep track of the notes themselves and they are always located on the HTML element.
+loznotes numbers notes automatically, so you only have to keep track of the notes themselves and they are always located on the HTML element.
 
 ##Implementation
 Let's say you want to annotate a section on your page with the text, "By default, this section will contain the three most recent featured stories." And let's say the display styles for this section are in the CSS pseudoclass called "features". 
