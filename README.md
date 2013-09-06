@@ -26,6 +26,8 @@ For example, let's say you want to annotate a section on your page with the text
 
 loznotes numbers notes automatically, so you only have to keep track of the notes themselves and they are always located on the HTML element.
 
+When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
+
 The enclosed index.hml file provides more examples of usage. At a later date, when I start using this newer version properly, I'll update with a real world example.
 
 If you'd like to change the red colour used for the note anchors and tab handle, "loznotes.less" contains a single variable, **@brand-color**, which you can change to your desired colour.
