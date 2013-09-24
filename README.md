@@ -28,7 +28,9 @@ loznotes numbers notes automatically, so you only have to keep track of the note
 
 When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
 
-The enclosed index.hml file provides more examples of usage. The following is a live example from a recent project:
+The enclosed index.html file provides more examples of usage.
+
+The following is a live example from a recent project:
 
 http://artfund-getinvolved-2013.lab7.co.uk/
 
