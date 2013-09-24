@@ -74,6 +74,7 @@ You're milage may vary considerably in other browsers.
 There shouldn't be too many, apart from:
 
 * Adding [data-notation] to img elements will not work.
+* Adding [data-notation] to child elements within a table, such as tr, th and td also causes problems. Adding to the table element itself works okay.
 * On a Nexus 7, running Android 4.x.x Chrome browser, the pane has slight CSS issues.
 
 Any more let me know.
