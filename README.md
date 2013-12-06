@@ -26,6 +26,12 @@ For example, let's say you want to annotate a section on your page with the text
 
 loznotes numbers notes automatically, so you only have to keep track of the notes themselves and they are always located on the HTML element.
 
+In addition to annotating elements, you can also add a page description on the body element:
+
+    <body data-notation="This is an example of a page description.">
+
+The **data-notation** attribute seems to allow simple HTML (<strong>, <em>). I've not tested this extensively.
+
 When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
 
 The enclosed index.html file provides more examples of usage and there is now [a live example from a recent client project](http://artfund-getinvolved-2013.lab7.co.uk/).
@@ -33,31 +39,29 @@ The enclosed index.html file provides more examples of usage and there is now [a
 If you'd like to change the red colour used for the note anchors and tab handle, "loznotes.less" contains a single variable, **@brand-color**, which you can change to your desired colour.
 
 ##Switches
-A client recently asked me if it were possible to show some wireframes either with the note anchors hidden or notes completely off. So I've done a quick hack to the jQuery to allow for simple switches.
+It is now possible to hide the note anchors by default, or turn the notes off completely, via switches.
 
 To hide the note anchors by default:
 
-**?notation=hidden**
-**?notation=hide**
+**?loznotes=hidden**
+**?loznotes=hide**
 
 To turn off note anchors and the notation pane completely:
 
-**?notation=off**
+**?loznotes=off**
 
 Example usage:
 
-http://mydomain.com/mypage.html?notation=hidden – hides the note anchors by default
-http://mydomain.com/mypage.html?notation=hide – hides the note anchors by default
+http://mydomain.com/mypage.html?loznotes=hidden – hides the note anchors by default
+http://mydomain.com/mypage.html?loznotes=hide – hides the note anchors by default
 
 or
 
-http://mydomain.com/mypage.html?notation=off – removes the note anchors and note pane completely
+http://mydomain.com/mypage.html?loznotes=off – removes the note anchors and note pane completely
 
-A URL without a switch provide note anchors and the notes pane as normal.
+A URL without a switch provided will display note anchors and the notes pane as normal. Also these switches will now work with Codekit's cachebuster query string.
 
-**N.B.**
-* The switches wont persist, so you'll need to add them to each URL.
-* You can use whatever you want between the '?' and the '=' – the jQuery only tests for the second part (the 'hidden'/'off' bit). So ?wireframe-notations=off would work as well.
+**N.B.** The switches wont persist, so you'll need to add them to each URL.
 
 ##How it works
 loznotes.js scans the DOM for elements with a [data-notation] attribute, then creates a numbered note anchor and a tab (with a title taken from the page's title attribute) containing each of the notations.
@@ -65,7 +69,7 @@ loznotes.js scans the DOM for elements with a [data-notation] attribute, then cr
 ##Browser support
 This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 and above in PC land.
 
-On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, both Chrome and Browser. It works of a fashion in the Android 3.2 browser.
+On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, in both Chrome and the default browser. It works of a fashion in the Android 3.2 browser.
 
 You're milage may vary considerably in other browsers.
 
