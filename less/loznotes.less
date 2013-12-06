@@ -1,29 +1,43 @@
-// ------------------------------------------------------------------------------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
+// loznotes is a notation layer for conveying information about wireframes, 
+// mockups and design comps. Originally a fork, this now a complete rewrite of 
+// Elliance's excellent Metaframe work (http://github.com/elliance/metaframe).
+//
+// ©2013 Loz Gray – Creative Commons Attribution Sharealike 3.0 Unported 
+// http://creativecommons.org/licenses/by-sa/3.0/
+//
+// Dependancies:
+//
+// jquery 2.x.x
+// loznotes.min.js
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
 // Table of contents
-// --------------------------------------------------
+// --------------------------------------
 // 1.0 imports
 // 2.0 variables
 // 3.0 general
 // 4.0 type
 // 5.0 layout
 // 6.0 modules
-// -------------------------------------------------------------------------------------------------------------------------------------------------  
+// -----------------------------------------------------------------------------
 
 // 1.0 imports
-// -------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 @import "library.less";
 @import "breakpoints.less";
 
 // 2.0 variables
-// -------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 @brand-color:#6b2323;
 
 // 3.0 general
-// -------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 // 4.0 type
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-.notes-anchor {
+// -----------------------------------------------------------------------------
+.loznotes__anchor {
 	figure {
 		.font-size(14,32);
 		font-family:@sans-serif;
@@ -33,8 +47,8 @@
 	}
 }
 
-.notes-tab-pane {
-	h1, h2, .note-count, .note-body, form {
+.loznotes__tab-pane {
+	h1, h2, .loznotes__page-description, .loznote__count, .loznote__body, form {
 		font-family:@sans-serif;
 		font-weight:normal;
 		color:#fff;	
@@ -49,7 +63,6 @@
 			.margin-bottom(24);
 		}
 	}
-
 	h2 {
 		.font-size(18,24);
 		.margin-bottom(12);
@@ -59,28 +72,28 @@
 			.margin-bottom(24);
 		}
 	}
-	.form-notes-display {
+	.loznotes__form {
 		.font-size(14,20);
 	}
 }
 
-.note-count {
+.loznote__count {
 	.font-size(14,32);
 	font-weight:bold;
 	text-align:center;
 }
 
-.note-body {
+.loznotes__page-description, .loznote__body {
 	.font-size(14,20);
 }
 
 // 5.0 layout
-// -------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 
 // 6.0 modules
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-.notes-anchor, .note-count {
+// -----------------------------------------------------------------------------
+.loznotes__anchor, .loznote__count {
 	@color:rgba(0,0,0,.35);
 	display:block;
 	width:32px;
@@ -93,12 +106,12 @@
 	.box-sizing;
 }
 
-.notes-anchor {
+.loznotes__anchor {
 	position:absolute;
 	.margin(-8,0,0,-8);
 }
 
-.notes-tab-pane, .notes-tab-control {
+.loznotes__tab-pane, .loznotes__tab-control {
 	position:fixed;
 	z-index:100;
 }
@@ -106,7 +119,7 @@
 @transition-bottom:bottom .2s ease;
 @transition-right:right .2s ease;
 
-.notes-tab-control {
+.loznotes__tab-control {
 	@radius:3;
 	top:auto;
 	right:auto;
@@ -121,11 +134,11 @@
 	-moz-transition:@transition-bottom;
 	-o-transition:@transition-bottom;
 	transition:@transition-bottom;
-	&.is-open {
+	&--is-active {
 		bottom:340px;
 	}
 	@media (min-width:@small-medium) {
-		&.is-open {
+		&--is-active {
 			bottom:200px;
 		}
 	}
@@ -144,13 +157,13 @@
 		-moz-transition:@transition-right;
 		-o-transition:@transition-right;
 		transition:@transition-right;
-		&.is-open {
+		&--is-active {
 			right:340px;
 		}
 	}
 }
 
-.notes-tab-pane {
+.loznotes__tab-pane {
 	top:auto;
 	right:auto;
 	bottom:-336px;
@@ -167,13 +180,13 @@
 	-moz-transition:@transition-bottom;
 	-o-transition:@transition-bottom;
 	transition:@transition-bottom;
-	&.is-open {
+	&--is-active {
 		bottom:0;
 	}
 	@media (min-width:@small-medium) {
 		bottom:-196px;
 		height:200px;
-		&.is-open {
+		&--is-active {
 			bottom:0;
 		}
 	}
@@ -192,34 +205,39 @@
 		-moz-transition:@transition-right;
 		-o-transition:@transition-right;
 		transition:@transition-right;
-		&.is-open {
+		&--is-active {
 			right:0;
 		}
 	}
 }
 
-.form-notes-display {
+.loznotes__form {
 	.margin-bottom(12);
 	@media (min-width:@medium) {
 		.margin-bottom(24);
 	}
 }
 
-#note-anchors-display-toggle {
+#loznotes__form__display-toggle {
 	margin-right:5px;
 }
 
-.note-count {
+.loznotes__page-description {
+	.margin-bottom(24);
+	padding:0;
+}
+
+.loznote__count {
 	float:left;
 	display:block;
 }
 
-.note-body {
+.loznote__body {
 	display:block;
 	.margin-bottom(24);
 	padding-left:44px;
 }
 
-.notes-hide {
+.loznotes__anchor--is-hidden {
 	display:none;
 }
