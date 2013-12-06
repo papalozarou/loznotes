@@ -30,7 +30,7 @@ In addition to annotating elements, you can also add a page description on the b
 
     <body data-notation="This is an example of a page description.">
 
-The **data-notation** attribute seems to allow simple HTML (<strong>, <em>). I've not tested this extensively.
+The **data-notation** attribute seems to allow simple HTML (strong, em) – I've not tested this extensively though.
 
 When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
 
