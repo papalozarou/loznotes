@@ -38,6 +38,8 @@ The **data-notation** attribute seems to allow simple HTML (strong, em) – I've
 
 When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
 
+**N.B.** Ajax calls do not currently trigger a refresh in the javascript version.
+
 The enclosed index.html file provides more examples of usage and there is now [a live example from a recent client project](http://artfund-getinvolved-2013.lab7.co.uk/).
 
 If you'd like to change the red colour used for the note anchors and tab handle, "loznotes.less" contains a single variable, **@brand-color**, which you can change to your desired colour.

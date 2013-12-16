@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// check if the notations and tab pane already exist, if so remove	
 	function checkExisting() {
 		if (document.querySelectorAll('.loznotes__tab-pane').length > 0) {
-			var loznotes = document.querySelectorAll('.loznotes__anchor','.loznotes__tab-control','.loznotes__tab-pane');
+			var loznotes = document.querySelectorAll('.loznotes__anchor, .loznotes__tab-control, .loznotes__tab-pane');
 			loznotes.parentNode.removeChild(loznotes);
 		}
 	}
@@ -236,17 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		notesTabPane.classList.toggle('loznotes__tab-pane--is-active');
 	}
 
-	// check ajax status
-	function ajaxUpdate(data) {
-		if (data.status === 'success') {
-			checkSubstring();
-		}
-	}
-	
 	checkSubstring();
 	
-	// if anything is loaded into the page via ajax, re-create the notes
-	document.addEventListener('pageUpdated', function() {
-		ajaxUpdate(data);
-	});
+	// if anything is loaded into the page via ajax, re-create the notes	
+	// AJAX funtction will go here
 });
