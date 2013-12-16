@@ -11,9 +11,13 @@ Since then the method of usage has been converted to a data attribute ([data-not
 In addition, switches have been added to enable defaulting to hidden anchors, or not displaying the anchors/notation pane at all.
 
 ##Installation & dependancies
-You'll need to be using jQuery (http://jquery.com/download/). Version 2.0.2 is included in the js/vendor folder for convenience.
+There are now two versions of loznotes to use, a vanilla javascript version and a jquery version.
 
-Reference "loznotes.css" inside your document's head and "loznotes.js" immediately before the close of the body. The index.html provides an example.
+To use the javascript version, simply add a link to "loznotes.css" inside your documents head and a link to the relevant jQuery/javascript file before the close of the body tag.
+
+If you decided to use the jQuery version, you'll also need to include jQuery (http://jquery.com/download/) before referencing the "loznotes--jquery.min.js". Version 2.0.2 is included in the js/vendor folder for convenience.
+
+The index.html provides an example.
 
 **N.B.** This package does not include a CSS reset – this has been seperated out to avoid interference with exisiting styles.
 
@@ -67,7 +71,7 @@ A URL without a switch provided will display note anchors and the notes pane as 
 loznotes.js scans the DOM for elements with a [data-notation] attribute, then creates a numbered note anchor and a tab (with a title taken from the page's title attribute) containing each of the notations.
 
 ##Browser support
-This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 and above in PC land.
+This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 (jquery version only) and above (javascript version) in PC land.
 
 On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, in both Chrome and the default browser. It works of a fashion in the Android 3.2 browser.
 
