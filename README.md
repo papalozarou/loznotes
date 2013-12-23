@@ -13,7 +13,7 @@ In addition, switches have been added to enable defaulting to hidden anchors, or
 ##Installation & dependancies
 There are now two versions of loznotes to use, a vanilla javascript version and a jquery version.
 
-To use the javascript version, simply add a link to "loznotes.css" inside your documents head and a link to the relevant jQuery/javascript file before the close of the body tag.
+To use loznotes, simply add a link to "loznotes.css" inside your documents head and a link to the relevant jQuery/javascript file before the close of the body tag.
 
 If you decided to use the jQuery version, you'll also need to include jQuery (http://jquery.com/download/) before referencing the "loznotes--jquery.min.js". Version 2.0.2 is included in the js/vendor folder for convenience.
 
@@ -34,11 +34,9 @@ In addition to annotating elements, you can also add a page description on the b
 
     <body data-notation="This is an example of a page description.">
 
-The **data-notation** attribute seems to allow simple HTML (strong, em) – I've not tested this extensively though.
+The **data-notation** attribute seems to allow simple inline HTML (strong, em) – I've not tested this extensively though.
 
 When content is pulled in through ajax calls there is an event listener on the document that will trigger the notes pane and anchors to be re-initialised, adding any new notes.
-
-**N.B.** Ajax calls do not currently trigger a refresh in the javascript version.
 
 The enclosed index.html file provides more examples of usage and there is now [a live example from a recent client project](http://artfund-getinvolved-2013.lab7.co.uk/).
 

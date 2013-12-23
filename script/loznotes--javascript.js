@@ -10,6 +10,18 @@
 //
 // loznotes.css
 // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// loznotes is a notation layer for conveying information about wireframes, 
+// mockups and design comps. Originally a fork, this now a complete rewrite of 
+// Elliance's excellent Metaframe work (http://github.com/elliance/metaframe).
+//
+// ©2013 Loz Gray – Creative Commons Attribution Sharealike 3.0 Unported 
+// http://creativecommons.org/licenses/by-sa/3.0/
+//
+// Dependancies:
+//
+// loznotes.css
+// -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
 	// some global variables
 	var notes;
@@ -53,6 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		// grab all elements with [data-notation]
 		notes = [].slice.call(document.querySelectorAll('[data-notation]'));
+		
+		console.log(notes);
 
 		// check for notation on body, create notes, tab and anchors
 		checkBodyNote();
@@ -66,8 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// check if the notations and tab pane already exist, if so remove	
 	function checkExisting() {
 		if (document.querySelectorAll('.loznotes__tab-pane').length > 0) {
-			var loznotes = document.querySelectorAll('.loznotes__anchor, .loznotes__tab-control, .loznotes__tab-pane');
-			loznotes.parentNode.removeChild(loznotes);
+			var existing = [].slice.call(document.querySelectorAll('.loznotes__anchor, .loznotes__tab-control, .loznotes__tab-pane'));
+	
+			for (var i = existing.length - 1; i >= 0; i--) {
+				existing[i].parentNode.removeChild(existing[i]);
+			}
 		}
 	}
 	
@@ -235,9 +252,66 @@ document.addEventListener('DOMContentLoaded', function() {
 		notesTabControl.classList.toggle('loznotes__tab-control--is-active');
 		notesTabPane.classList.toggle('loznotes__tab-pane--is-active');
 	}
+	
+	function ajaxListener() {
+		// if anything is loaded into the page via ajax, re-create the notes
+		var loznotes__ajaxListener = {};
+	
+		loznotes__ajaxListener.tempOpen = XMLHttpRequest.prototype.open;
+		loznotes__ajaxListener.tempSend = XMLHttpRequest.prototype.send;
+	
+		// callback to be invoked on readystateChange
+		loznotes__ajaxListener.callback = function() {
+			if (this.readyState == 4) {
+				// function wrapped in setTimeout as readyState returns before document updates
+				var checkAgain = setTimeout(function() {
+					checkSubstring();	
+				},1);
+				
+				checkAgain;
+			}
+		};
+	
+		XMLHttpRequest.prototype.open = function(a,b) {		
+			if (!a) {
+				var a='';
+			}
+		
+			if (!b) {
+				var b='';
+			}
+		
+			loznotes__ajaxListener.tempOpen.apply(this, arguments);
+			loznotes__ajaxListener.method = a;
+			loznotes__ajaxListener.url = b;
+		
+			if (a.toLowerCase() == 'get') {
+				loznotes__ajaxListener.data = b.split('?');
+				loznotes__ajaxListener.data = loznotes__ajaxListener.data[1];
+			}
+		};
+	
+		XMLHttpRequest.prototype.send = function(a,b) {		
+			if (!a) {
+				var a='';
+			}
+		
+			if (!b) {
+				var b='';
+			}
+		
+			loznotes__ajaxListener.tempSend.apply(this, arguments);
+		
+			if (loznotes__ajaxListener.method.toLowerCase() == 'post') {
+				loznotes__ajaxListener.data = a;
+			}
+		
+			// assigning callback to onreadystatechange instead of calling directly
+			this.onreadystatechange = loznotes__ajaxListener.callback;
+		};
+	}
 
 	checkSubstring();
+	ajaxListener();
 	
-	// if anything is loaded into the page via ajax, re-create the notes	
-	// AJAX funtction will go here
 });
