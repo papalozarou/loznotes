@@ -68,7 +68,7 @@ A URL without a switch provided will display note anchors and the notes pane as 
 **N.B.** The switches wont persist, so you'll need to add them to each URL.
 
 ##How it works
-loznotes.js scans the DOM for elements with a [data-notation] attribute, then creates a numbered note anchor and a tab (with a title taken from the page's title attribute) containing each of the notations.
+loznotes scans the DOM for elements with a [data-notation] attribute, then creates a numbered note anchor and a tab (with a title taken from the page's title attribute) containing each of the notations.
 
 ##Browser support
 This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 (jquery version only) and above (javascript version) in PC land.
