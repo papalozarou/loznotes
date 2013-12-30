@@ -65,8 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		// grab all elements with [data-notation]
 		notes = [].slice.call(document.querySelectorAll('[data-notation]'));
-		
-		console.log(notes);
 
 		// check for notation on body, create notes, tab and anchors
 		checkBodyNote();
