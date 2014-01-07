@@ -32,14 +32,16 @@ $(function () {
 		
 			hideNotes();
 		
-			interactionAnchorsTabControl();
+			interactionAnchors();
+			interactionTabControl();
 			interactionForm();
 		} else if ($.inArray('loznotes=off',subStrings) > -1) {
 			return false;
 		} else {
 			createNotes();
 
-			interactionAnchorsTabControl();
+			interactionAnchors();
+			interactionTabControl();
 			interactionForm();
 		
 			// show note anchors by default
@@ -60,7 +62,7 @@ $(function () {
 		createNoteAnchors();
 	
 		// grab inserted note anchors
-		notesAnchors = $('.loznotes__anchor');
+		notesAnchors = $('.loznotes__anchor a');
 	}
 
 	// check if the notations and tab pane already exist, if so remove	
@@ -119,7 +121,7 @@ $(function () {
 	
 		// number and add the notes to the note list
 		for (var i = 0; i < notes.length; i++) {
-			notesList.append('<dt class="loznote__count loznote__count-' + (i + 1) + '">' + (i + 1) + '</dt>' + '<dd class="loznote__body loznote__body-' + (i + 1) + '">' + $(notes[i]).data('notation') + '</dd>');
+			notesList.append('<dt id= "loznote--' + (i + 1) + '" class="loznote__count loznote__count-' + (i + 1) + '">' + (i + 1) + '</dt>' + '<dd class="loznote__body loznote__body-' + (i + 1) + '">' + $(notes[i]).data('notation') + '</dd>');
 		}
 	}
 	
@@ -127,21 +129,40 @@ $(function () {
 	function createNoteAnchors () {
 		// add note numbers to elements with [data-notation]
 		for (var i = 0; i < notes.length; i++) {
-			$(notes[i]).prepend('<span class="loznotes__anchor"><figure>' + (i + 1) + '</figure></span>');
+			$(notes[i]).prepend('<figure class="loznotes__anchor"><a href="#loznote--' + (i + 1) + '">' + (i + 1) + '</a></figure>');
 		}
 	}
 
 	// hhide note anchors by default
 	function hideNotes() {
-		notesAnchors.addClass('loznotes__anchor--is-hidden');
+		notesAnchors.parent().addClass('loznotes__anchor--is-hidden');
+	}
+	
+	// note anchor click function
+	function interactionAnchors(){
+		// open tab pane
+		$(notesAnchors).click(function (e) {
+			toggleClass();
+
+			// don't scroll within tab if first note is clicked/tapped	
+			if (this.hash == '#loznote--1') {
+				notesTabPane.scrollTop(0);
+			} else {
+				notesTabPane.scrollTop($(this.hash).position().top - 20);
+			}
+			
+			e.preventDefault();
+		});
 	}
 
-	// note anchor click and tab control click function
-	function interactionAnchorsTabControl(){
+	// note tab control click function
+	function interactionTabControl(){
 		// open tab pane
-		$(notesTabControl).add(notesAnchors).click(function (e) {
-			notesTabControl.toggleClass('loznotes__tab-control--is-active');
-			notesTabPane.toggleClass('loznotes__tab-pane--is-active');
+		$(notesTabControl).click(function (e) {
+			toggleClass();
+			
+			// reset scroll top in case opened at anchor
+			notesTabPane.scrollTop(0);
 
 			e.preventDefault();
 		});
@@ -150,8 +171,13 @@ $(function () {
 	// turn note anchors on or off
 	function interactionForm(){
 		$('#loznotes__form__display-toggle').click(function () {
-			notesAnchors.toggleClass('loznotes__anchor--is-hidden');
+			notesAnchors.parent().toggleClass('loznotes__anchor--is-hidden');
 		});
+	}
+	
+	function toggleClass(){
+		notesTabControl.toggleClass('loznotes__tab-control--is-active');
+		notesTabPane.toggleClass('loznotes__tab-pane--is-active');
 	}
 
 	checkSubstring();

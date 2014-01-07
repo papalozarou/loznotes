@@ -15,7 +15,12 @@
 br:last-child {
   clear: both;
 }
-.loznotes__anchor figure {
+.loznotes__anchor {
+  text-align: center;
+}
+.loznotes__anchor a:link,
+.loznotes__anchor a:visited,
+.loznotes__anchor a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
@@ -23,7 +28,7 @@ br:last-child {
   font-family: Helmet, Freesans, sans-serif;
   font-weight: bold;
   color: #fff;
-  text-align: center;
+  text-decoration: none;
 }
 .loznotes__tab-pane h1,
 .loznotes__tab-pane h2,
@@ -95,7 +100,7 @@ br:last-child {
   line-height: 20px;
   line-height: 2rem;
 }
-.loznotes__anchor,
+.loznotes__anchor a,
 .loznote__count {
   display: block;
   width: 32px;
