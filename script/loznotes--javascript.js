@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		createNoteAnchors();
 		
 		// grab inserted note anchors
-		notesAnchors = [].slice.call(document.querySelectorAll('.loznotes__anchor'));
+		notesAnchors = [].slice.call(document.querySelectorAll('.loznotes__anchor a'));
 	}
 
 	// check if the notations and tab pane already exist, if so remove	
@@ -179,10 +179,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		for (var i = 0; i < notes.length; i++) {
 			var dt = document.createElement('dt');
+			var dtId = 'loznote--' + (i + 1);
 			var dtClass = 'loznote__count-' + (i + 1);
 			var dd = document.createElement('dd');
 			var ddClass = 'loznote_body-' + (i + 1);
 			
+			dt.id = dtId;
 			dt.classList.add('loznote__count');
 			dt.classList.add(dtClass);
 			dd.classList.add('loznote__body');
@@ -200,21 +202,30 @@ document.addEventListener('DOMContentLoaded', function() {
 	function createNoteAnchors() {
 		// add note numbers to elements with [data-notation]
 		for (var i = 0; i < notes.length; i++) {
-			var noteAnchor = document.createElement('span');
 			var figure = document.createElement('figure');
+			var noteAnchor = document.createElement('a');
+			var noteAnchorHref = '#loznote--' + (i + 1);
 			
-			noteAnchor.classList.add('loznotes__anchor');
-			figure.innerHTML = i + 1;
+			figure.classList.add('loznotes__anchor');
+			noteAnchor.innerHTML = i + 1;
+			noteAnchor.href = noteAnchorHref;
 			
-			noteAnchor.appendChild(figure);
+			figure.appendChild(noteAnchor);
 			
-			notes[i].parentNode.insertBefore(noteAnchor,notes[i]);
+			console.log(notes[i], notes[i].firstChild);
+			
+			// inserts note as first child of element with [data-notation]
+			if (notes[i].firstChild) {
+				notes[i].insertBefore(figure,notes[i].firstChild);
+			} else {
+				notes[i].appendChild(figure);
+			}
 		}
 	}
 	
 	function hideNotes() {
 		[].forEach.call(notesAnchors, function (e) {
-			e.classList.add('loznotes__anchor--is-hidden');
+			e.parentNode.classList.add('loznotes__anchor--is-hidden');
 		});
 	}
 	
@@ -223,6 +234,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		[].forEach.call(notesAnchors, function(e) {
 			e.addEventListener('click', function() {
 				toggleClass();
+		
+				window.event.preventDefault();
+				
+				// don't scroll within tab if first note is clicked/tapped	
+				if (this.hash == '#loznote--1') {
+					notesTabPane.scrollTop = 0;
+				} else {
+					notesTabPane.scrollTop = document.querySelector(this.hash).offsetTop - 20;				
+				}
 			}, false);
 		});
 	}
@@ -231,7 +251,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	function interactionTabControl() {
 		notesTabControl.addEventListener('click', function(e) {
 			toggleClass();
-		
+			
+			// reset scrollTop in case opened at anchor
+			notesTabPane.scrollTop = 0;
+			
 			e.preventDefault();
 		}, false);
 	}
@@ -240,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function interactionForm() {
 		document.querySelector('#loznotes__form__display-toggle').addEventListener('click', function() {
 			[].forEach.call(notesAnchors, function (e) {
-				e.classList.toggle('loznotes__anchor--is-hidden');
+				e.parentNode.classList.toggle('loznotes__anchor--is-hidden');
 			});
 		}, false);
 	}
@@ -263,10 +286,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (this.readyState == 4) {
 				// function wrapped in setTimeout as readyState returns before document updates
 				var checkAgain = setTimeout(function() {
-					checkSubstring();	
+					checkSubstring();
 				},1);
 				
-				checkAgain;
+				checkAgain();
 			}
 		};
 	
@@ -289,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		};
 	
-		XMLHttpRequest.prototype.send = function(a,b) {		
+		XMLHttpRequest.prototype.send = function(a,b) {
 			if (!a) {
 				var a='';
 			}
