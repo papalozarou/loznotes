@@ -6,7 +6,7 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Wireframes Demo</title>
+    <title>loznotes Demo</title>
     <meta name="description" content="">
 	
 	<!-- reset and example stylesheets, nothing to do with loznotes -->
@@ -19,13 +19,13 @@
 
 <body data-notation="This is an example of a page description note, on the body element.">
 	<div class="container">
-	    <header>
+	    <header data-notation="This is the site header.">
 	    </header>
 
 	    <section class="main" data-notation="This is your main section. Hero content and such will go here." >
 	        <p>Hello world! This is a Wireframe Boilerplate.</p>
 
-	        <h1>This is a test header, look at it dance.</h1>
+	        <h1 data-notation="This is the page header">This is a test header, look at it dance.</h1>
 
 	        <div >
 	        	<img src="img/image-3x2.svg" alt="An image" class="image" width="auto" />
@@ -38,7 +38,7 @@
 	        <ul data-notation="This is a list of items. This will update">
 	            <li>This is a news item</li>
 	            <li>This is a news item</li>
-	            <li>This is a news item</li>
+	            <li data-notation="This is a list item.">This is a news item</li>
 	            <li>This is a news item</li>
 	        </ul>
 
@@ -48,16 +48,16 @@
 	</div>
 
 	<div class="container">
-	    <footer>
+	    <footer data-notation="This is the site footer.">
 	    </footer>
 	</div>
 
 	<!-- jQuery script reference – only needed if using loznotes--jquery.min.js -->
-    <!--<script src="js/vendor/jquery-2.0.2.min.js"></script>-->
+    <!-- <script src="js/vendor/jquery-2.0.2.min.js"></script> -->
 	        
 	<!-- loznotes script reference -->
-    <script src="js/loznotes--javascript.min.js"></script>
-	<!--<script src="js/loznotes--jquery.min.js"></script>-->
+	<script src="js/loznotes--javascript.min.js"></script>
+	 <!-- <script src="js/loznotes--jquery.min.js"></script> -->
 	             
 </body>
 
