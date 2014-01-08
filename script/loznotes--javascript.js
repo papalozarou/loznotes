@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					checkSubstring();
 				},1);
 				
-				checkAgain();
+				checkAgain;
 			}
 		};
 	
