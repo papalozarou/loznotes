@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	var notesTabControl;
 	var notesTabPane;
 	var notesAnchors;
+	
+	var selectedAnchorClass = 'loznote__anchor--is-selected';
+	var selectedCountClass = 'loznote__count--is-selected';
+	var tabControlActive = 'loznotes__tab-control--is-active';
+	var tabPaneActive = 'loznotes__tab-pane--is-active';
 
 	// check substring and create notes	
 	function checkSubstring() {
@@ -210,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	
 	function hideNotes() {
-		[].forEach.call(notesAnchors, function (e) {
+		[].forEach.call(notesAnchors, function(e) {
 			e.parentNode.classList.add('loznotes__anchor--is-hidden');
 		});
 	}
@@ -219,16 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	function interactionAnchors() {
 		[].forEach.call(notesAnchors, function(e) {
 			e.addEventListener('click', function() {
-				toggleClass();
-		
 				window.event.preventDefault();
+
+				addRemoveClasses(this);
 				
-				// don't scroll within tab if first note is clicked/tapped	
-				if (this.hash == '#loznote--1') {
-					notesTabPane.scrollTop = 0;
-				} else {
-					notesTabPane.scrollTop = document.querySelector(this.hash).offsetTop - 20;				
-				}
 			}, false);
 		});
 	}
@@ -236,7 +235,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	// note tab control click function
 	function interactionTabControl() {
 		notesTabControl.addEventListener('click', function(e) {
-			toggleClass();
+			// grab the currently selected anchor if there is one
+			var selectedAnchor = document.querySelector('.loznote__anchor--is-selected');
+			
+			// if there is a currently selected anchor, remove class from anchor and corresponding count
+			if (selectedAnchor) {
+				// get new anchor parent node
+				var selectedAnchorHash = selectedAnchor.querySelector('a').hash;
+				
+				selectedAnchor.classList.remove(selectedAnchorClass);
+				document.querySelector(selectedAnchorHash).classList.remove(selectedCountClass);
+			}
+			
+			toggleTabClass();
 			
 			// reset scrollTop in case opened at anchor
 			notesTabPane.scrollTop = 0;
@@ -254,71 +265,104 @@ document.addEventListener('DOMContentLoaded', function() {
 		}, false);
 	}
 
-	// toggle classes
-	function toggleClass() {
-		notesTabControl.classList.toggle('loznotes__tab-control--is-active');
-		notesTabPane.classList.toggle('loznotes__tab-pane--is-active');
+	// toggle classes for tab
+	function toggleTabClass() {
+		notesTabControl.classList.toggle(tabControlActive);
+		notesTabPane.classList.toggle(tabPaneActive);
 	}
 	
-	function ajaxListener() {
-		// if anything is loaded into the page via ajax, re-create the notes
-		var loznotes__ajaxListener = {};
-	
-		loznotes__ajaxListener.tempOpen = XMLHttpRequest.prototype.open;
-		loznotes__ajaxListener.tempSend = XMLHttpRequest.prototype.send;
-	
-		// callback to be invoked on readystateChange
-		loznotes__ajaxListener.callback = function() {
-			if (this.readyState == 4) {
-				// function wrapped in setTimeout as readyState returns before document updates
-				var checkAgain = setTimeout(function() {
-					checkSubstring();
-				},1);
+	// sorts out highlight classes for note anchors and counts
+	function addRemoveClasses(newAnchor) {
+		// grab the currently selected anchor if there is one
+		var selectedAnchor = document.querySelector('.loznote__anchor--is-selected');
+		
+		// get new anchor parent node
+		var newAnchorParent = newAnchor.parentNode;
+		
+		// test to see if there is a current anchor or not
+		if (selectedAnchor) {
+			
+			// if there is decided if the clicked anchor is already selected or not
+			if (newAnchorParent.classList.contains(selectedAnchorClass)) {
+				// remove classes if clicked anchor matches currently selected
+				newAnchorParent.classList.remove(selectedAnchorClass);
+				document.querySelector(newAnchor.hash).classList.remove(selectedCountClass);
 				
-				checkAgain();
+				// close tab
+				notesTabControl.classList.remove(tabControlActive);
+				notesTabPane.classList.remove(tabPaneActive);
+				
+				// reset scrollTop of tab
+				notesTabPane.scrollTop = 0;
+			} else {
+				var selectedAnchorHash = selectedAnchor.querySelector('a').hash;
+				
+				// remove class from previous anchor and corresponding count
+				selectedAnchor.classList.remove(selectedAnchorClass);
+				document.querySelector(selectedAnchorHash).classList.remove(selectedCountClass);
+				
+				// add classes to clicked anchor and corresponding count
+				newAnchorParent.classList.add(selectedAnchorClass);
+				document.querySelector(newAnchor.hash).classList.add(selectedCountClass);
+				
+				// open tab
+				notesTabControl.classList.add(tabControlActive);
+				notesTabPane.classList.add(tabPaneActive);
+				
+				scrollToAnchor(newAnchor.hash);
 			}
-		};
-	
-		XMLHttpRequest.prototype.open = function(a,b) {		
-			if (!a) {
-				var a='';
-			}
-		
-			if (!b) {
-				var b='';
-			}
-		
-			loznotes__ajaxListener.tempOpen.apply(this, arguments);
-			loznotes__ajaxListener.method = a;
-			loznotes__ajaxListener.url = b;
-		
-			if (a.toLowerCase() == 'get') {
-				loznotes__ajaxListener.data = b.split('?');
-				loznotes__ajaxListener.data = loznotes__ajaxListener.data[1];
-			}
-		};
-	
-		XMLHttpRequest.prototype.send = function(a,b) {
-			if (!a) {
-				var a='';
-			}
-		
-			if (!b) {
-				var b='';
-			}
-		
-			loznotes__ajaxListener.tempSend.apply(this, arguments);
-		
-			if (loznotes__ajaxListener.method.toLowerCase() == 'post') {
-				loznotes__ajaxListener.data = a;
-			}
-		
-			// assigning callback to onreadystatechange instead of calling directly
-			this.onreadystatechange = loznotes__ajaxListener.callback;
-		};
+		} else {
+			// add classes to clicked anchor and corresponding count
+			newAnchorParent.classList.add(selectedAnchorClass);
+			document.querySelector(newAnchor.hash).classList.add(selectedCountClass);
+			
+			// open tab
+			notesTabControl.classList.add(tabControlActive);
+			notesTabPane.classList.add(tabPaneActive);
+			
+			scrollToAnchor(newAnchor.hash);
+		}
 	}
+	
+	// checks the hash of the clicked note anchor and scrolls accordingly
+	function scrollToAnchor(theHash) {
+		if (theHash === '#loznote--1') {
+			notesTabPane.scrollTop = 0;
+		} else {
+			notesTabPane.scrollTop = document.querySelector(theHash).offsetTop - 20;
+		}
+	}
+	
+	// function addXMLRequestCallback(callback) {
+	// 	var oldSend;
+	// 	if( XMLHttpRequest.callbacks ) {
+	// 		XMLHttpRequest.callbacks.push(callback);
+	// 	} else {
+	// 		// create a callback queue
+	// 		XMLHttpRequest.callbacks = [callback];
+	// 		
+	// 		// store the native send()
+	// 		oldSend = XMLHttpRequest.prototype.send;
+	// 		
+	// 		// override the native send()
+	// 		XMLHttpRequest.prototype.send = function() {
+	// 			// call the native send()
+	// 			oldSend.apply(this, arguments);
+	// 
+	// 			this.onreadystatechange = function () {
+	// 				if (this.readyState === 4) {
+	// 					// function wrapped in setTimeout as readyState returns before document updates
+	// 					var checkAgain = function() {
+	// 						checkSubstring();
+	// 					};
+	// 		
+	// 					checkAgain();
+	// 				}
+	// 			};
+	// 		};
+	// 	}
+	// }
 
 	checkSubstring();
-	ajaxListener();
-	
+	// addXMLRequestCallback();
 });
