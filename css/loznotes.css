@@ -18,9 +18,7 @@ br:last-child {
 .loznotes__anchor {
   text-align: center;
 }
-.loznotes__anchor a:link,
-.loznotes__anchor a:visited,
-.loznotes__anchor a:hover {
+.loznotes__anchor a:link {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
@@ -93,6 +91,11 @@ br:last-child {
   font-weight: bold;
   text-align: center;
 }
+.loznote__anchor--is-selected a:link,
+.loznote__count--is-selected {
+  font-weight: bold;
+  color: #fff;
+}
 .loznotes__page-description,
 .loznote__body {
   font-size: 14px;
@@ -100,7 +103,7 @@ br:last-child {
   line-height: 20px;
   line-height: 2rem;
 }
-.loznotes__anchor a,
+.loznotes__anchor a:link,
 .loznote__count {
   display: block;
   width: 32px;
@@ -122,6 +125,10 @@ br:last-child {
   position: absolute;
   margin: -8px 0px 0px -8px;
   margin: -0.8rem 0px 0rem -8px;
+}
+.loznote__anchor--is-selected a:link,
+.loznote__count--is-selected {
+  background: #236b6b;
 }
 .loznotes__tab-pane,
 .loznotes__tab-control {
@@ -147,7 +154,7 @@ br:last-child {
   transition: bottom 0.2s ease;
 }
 .loznotes__tab-control--is-active {
-  bottom: 340px;
+  bottom: 320px;
 }
 @media (min-width: 480px) {
   .loznotes__tab-control--is-active {
@@ -182,10 +189,10 @@ br:last-child {
 .loznotes__tab-pane {
   top: auto;
   right: auto;
-  bottom: -336px;
+  bottom: -316px;
   width: 100%;
   max-width: 100%;
-  height: 340px;
+  height: 320px;
   background: #000;
   padding: 10px 10px 10px 10px;
   padding: 1rem 10px 1rem 10px;
@@ -262,6 +269,8 @@ br:last-child {
   display: block;
   margin-bottom: 24px;
   margin-bottom: 2.4000000000000004rem;
+  padding-top: 5px;
+  padding-top: 0.5rem;
   padding-left: 44px;
 }
 .loznotes__anchor--is-hidden {

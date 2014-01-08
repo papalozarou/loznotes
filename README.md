@@ -40,7 +40,7 @@ When content is pulled in through ajax calls there is an event listener on the d
 
 The enclosed index.html file provides more examples of usage and there is now [a live example from a recent client project](http://artfund-getinvolved-2013.lab7.co.uk/).
 
-If you'd like to change the red colour used for the note anchors and tab handle, "loznotes.less" contains a single variable, **@brand-color**, which you can change to your desired colour.
+If you'd like to change the red colour, or the highlight color, "loznotes.less" contains a two colour variables, **@color--brand** and **@color--highlight**, which you can change to whatever you need.
 
 ##Switches
 It is now possible to hide the note anchors by default, or turn the notes off completely, via switches.
