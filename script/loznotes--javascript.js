@@ -3,19 +3,7 @@
 // mockups and design comps. Originally a fork, this now a complete rewrite of 
 // Elliance's excellent Metaframe work (http://github.com/elliance/metaframe).
 //
-// ©2013 Loz Gray – Creative Commons Attribution Sharealike 3.0 Unported 
-// http://creativecommons.org/licenses/by-sa/3.0/
-//
-// Dependancies:
-//
-// loznotes.css
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
-// loznotes is a notation layer for conveying information about wireframes, 
-// mockups and design comps. Originally a fork, this now a complete rewrite of 
-// Elliance's excellent Metaframe work (http://github.com/elliance/metaframe).
-//
-// ©2013 Loz Gray – Creative Commons Attribution Sharealike 3.0 Unported 
+// ©2013-2014 Loz Gray – Creative Commons Attribution Sharealike 3.0 Unported 
 // http://creativecommons.org/licenses/by-sa/3.0/
 //
 // Dependancies:
@@ -211,8 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			noteAnchor.href = noteAnchorHref;
 			
 			figure.appendChild(noteAnchor);
-			
-			console.log(notes[i], notes[i].firstChild);
 			
 			// inserts note as first child of element with [data-notation]
 			if (notes[i].firstChild) {
