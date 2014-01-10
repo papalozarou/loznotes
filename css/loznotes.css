@@ -120,7 +120,6 @@ br:last-child {
   -webkit-border-radius: 16px;
   border-radius: 16px;
   /* IE, Opera, W3C */
-  cursor: pointer;
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
@@ -144,7 +143,6 @@ br:last-child {
   -webkit-border-radius: 16px;
   border-radius: 16px;
   /* IE, Opera, W3C */
-  cursor: pointer;
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
