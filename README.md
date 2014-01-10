@@ -73,7 +73,9 @@ loznotes scans the DOM for elements with a [data-notation] attribute, then creat
 ##Browser support
 This has been tested on Mac versions of Chrome (28), Safari (6.0.5), Firefox (14.0.1) and Opera (12.01). It should work in IE9 (jquery version only) and above (javascript version) in PC land.
 
-On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, in both Chrome and the default browser. It works of a fashion in the Android 3.2 browser. There's a weird bug with iOS Chrome that stops the tab from staying open – I'm trying to fix this.
+On hand held devices it has been tested on iOS 5-7 Mobile Safari and on Andriod 4.x, in both Chrome and the default browser. It works of a fashion in the Android 3.2 browser.
+
+There's a weird bug with iOS Chrome that stops the tab from staying open – I'm trying to fix this.
 
 You're milage may vary considerably in other browsers.
 
