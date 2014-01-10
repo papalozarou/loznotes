@@ -12,17 +12,18 @@
 // -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
 	// some global variables
-	var notes;
-	var bodyNote;
+	var notes,
+		bodyNote;
 	
-	var notesTabControl;
-	var notesTabPane;
-	var notesAnchors;
+	var notesTabControl,
+		notesTabPane,
+		notesAnchors;
 	
-	var selectedAnchorClass = 'loznote__anchor--is-selected';
-	var selectedCountClass = 'loznote__count--is-selected';
-	var tabControlActive = 'loznotes__tab-control--is-active';
-	var tabPaneActive = 'loznotes__tab-pane--is-active';
+	var anchorHidden = 'loznotes__anchor--is-hidden',
+		anchorSelected = 'loznotes__anchor--is-selected',
+		countSelected = 'loznote__count--is-selected',
+		tabControlActive = 'loznotes__tab-control--is-active',
+		tabPaneActive = 'loznotes__tab-pane--is-active';
 
 	// check substring and create notes	
 	function checkSubstring() {
@@ -216,18 +217,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	function hideNotes() {
 		[].forEach.call(notesAnchors, function(e) {
-			e.parentNode.classList.add('loznotes__anchor--is-hidden');
+			e.parentNode.classList.add(anchorHidden);
 		});
 	}
 	
 	// note anchor click function
 	function interactionAnchors() {
 		[].forEach.call(notesAnchors, function(e) {
-			e.addEventListener('click', function() {
-				window.event.preventDefault();
+			e.addEventListener('click', function(e) {
+				e.preventDefault();
 
-				addRemoveClasses(this);
-				
+				addRemoveClasses(this);	
 			}, false);
 		});
 	}
@@ -236,15 +236,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	function interactionTabControl() {
 		notesTabControl.addEventListener('click', function(e) {
 			// grab the currently selected anchor if there is one
-			var selectedAnchor = document.querySelector('.loznote__anchor--is-selected');
+			var selectedAnchorParent = document.querySelector('.loznotes__anchor--is-selected');
 			
 			// if there is a currently selected anchor, remove class from anchor and corresponding count
-			if (selectedAnchor) {
+			if (selectedAnchorParent) {
 				// get new anchor parent node
-				var selectedAnchorHash = selectedAnchor.querySelector('a').hash;
+				var selectedAnchorHash = selectedAnchorParent.querySelector('a').hash;
 				
-				selectedAnchor.classList.remove(selectedAnchorClass);
-				document.querySelector(selectedAnchorHash).classList.remove(selectedCountClass);
+				removeClass(selectedAnchorParent,selectedAnchorHash);
 			}
 			
 			toggleTabClass();
@@ -260,68 +259,78 @@ document.addEventListener('DOMContentLoaded', function() {
 	function interactionForm() {
 		document.querySelector('#loznotes__form__display-toggle').addEventListener('click', function() {
 			[].forEach.call(notesAnchors, function (e) {
-				e.parentNode.classList.toggle('loznotes__anchor--is-hidden');
+				e.parentNode.classList.toggle(anchorHidden);
 			});
 		}, false);
-	}
-
-	// toggle classes for tab
-	function toggleTabClass() {
-		notesTabControl.classList.toggle(tabControlActive);
-		notesTabPane.classList.toggle(tabPaneActive);
 	}
 	
 	// sorts out highlight classes for note anchors and counts
 	function addRemoveClasses(newAnchor) {
 		// grab the currently selected anchor if there is one
-		var selectedAnchor = document.querySelector('.loznote__anchor--is-selected');
+		var selectedAnchorParent = document.querySelector('.loznotes__anchor--is-selected');
 		
 		// get new anchor parent node
 		var newAnchorParent = newAnchor.parentNode;
+		var newAnchorHash = newAnchor.hash;
 		
 		// test to see if there is a current anchor or not
-		if (selectedAnchor) {
-			
-			// if there is decided if the clicked anchor is already selected or not
-			if (newAnchorParent.classList.contains(selectedAnchorClass)) {
-				// remove classes if clicked anchor matches currently selected
-				newAnchorParent.classList.remove(selectedAnchorClass);
-				document.querySelector(newAnchor.hash).classList.remove(selectedCountClass);
+		if (selectedAnchorParent) {
+			// if there is, decide if the clicked anchor is already selected or not
+			if (newAnchorParent.classList.contains(anchorSelected)) {
+				removeClass(newAnchorParent,newAnchorHash);
 				
-				// close tab
-				notesTabControl.classList.remove(tabControlActive);
-				notesTabPane.classList.remove(tabPaneActive);
+				closeTab();
 				
 				// reset scrollTop of tab
 				notesTabPane.scrollTop = 0;
 			} else {
-				var selectedAnchorHash = selectedAnchor.querySelector('a').hash;
+				var selectedAnchorHash = selectedAnchorParent.querySelector('a').hash;
 				
-				// remove class from previous anchor and corresponding count
-				selectedAnchor.classList.remove(selectedAnchorClass);
-				document.querySelector(selectedAnchorHash).classList.remove(selectedCountClass);
+				removeClass(selectedAnchorParent,selectedAnchorHash);
 				
-				// add classes to clicked anchor and corresponding count
-				newAnchorParent.classList.add(selectedAnchorClass);
-				document.querySelector(newAnchor.hash).classList.add(selectedCountClass);
+				addClass(newAnchorParent,newAnchorHash);
 				
-				// open tab
-				notesTabControl.classList.add(tabControlActive);
-				notesTabPane.classList.add(tabPaneActive);
+				openTab();
 				
-				scrollToAnchor(newAnchor.hash);
+				scrollToAnchor(newAnchorHash);
 			}
 		} else {
-			// add classes to clicked anchor and corresponding count
-			newAnchorParent.classList.add(selectedAnchorClass);
-			document.querySelector(newAnchor.hash).classList.add(selectedCountClass);
+			addClass(newAnchorParent,newAnchorHash);
 			
-			// open tab
-			notesTabControl.classList.add(tabControlActive);
-			notesTabPane.classList.add(tabPaneActive);
+			openTab();
 			
-			scrollToAnchor(newAnchor.hash);
+			scrollToAnchor(newAnchorHash);
 		}
+	}
+	
+	// add classes to anchor and count
+	function addClass(anchorParent,anchorHash) {
+		anchorParent.classList.add(anchorSelected);
+		document.querySelector(anchorHash).classList.add(countSelected);
+	}
+	
+	// remove classes from anchor and count
+	function removeClass(anchorParent,anchorHash) {
+		anchorParent.classList.remove(anchorSelected);
+		document.querySelector(anchorHash).classList.remove(countSelected);
+	}
+	
+	// simple function to open tab
+	function openTab() {
+		notesTabControl.classList.add(tabControlActive);
+		notesTabPane.classList.add(tabPaneActive);
+	}
+	
+	// simple function to close tab
+	function closeTab() {
+		notesTabControl.classList.remove(tabControlActive);
+		notesTabPane.classList.remove(tabPaneActive);
+	}
+	
+	// toggle classes for tab
+	function toggleTabClass() {
+		notesTabControl.classList.toggle(tabControlActive);
+		notesTabPane.classList.toggle(tabPaneActive);
 	}
 	
 	// checks the hash of the clicked note anchor and scrolls accordingly
@@ -333,36 +342,29 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 	
-	// function addXMLRequestCallback(callback) {
-	// 	var oldSend;
-	// 	if( XMLHttpRequest.callbacks ) {
-	// 		XMLHttpRequest.callbacks.push(callback);
-	// 	} else {
-	// 		// create a callback queue
-	// 		XMLHttpRequest.callbacks = [callback];
-	// 		
-	// 		// store the native send()
-	// 		oldSend = XMLHttpRequest.prototype.send;
-	// 		
-	// 		// override the native send()
-	// 		XMLHttpRequest.prototype.send = function() {
-	// 			// call the native send()
-	// 			oldSend.apply(this, arguments);
-	// 
-	// 			this.onreadystatechange = function () {
-	// 				if (this.readyState === 4) {
-	// 					// function wrapped in setTimeout as readyState returns before document updates
-	// 					var checkAgain = function() {
-	// 						checkSubstring();
-	// 					};
-	// 		
-	// 					checkAgain();
-	// 				}
-	// 			};
-	// 		};
-	// 	}
-	// }
+	// hook in to ajax requests to update notes
+	function ajaxListener() {
+		// store open request;
+		var oldSend = XMLHttpRequest.prototype.send;
+		
+		XMLHttpRequest.prototype.send = function() {
+			this.addEventListener("readystatechange", checkReadyState);
+			
+			// run the real open
+			oldSend.apply(this,arguments);
+		};
+	}
+	
+	// check if readyState is complete
+	function checkReadyState() {
+		if (this.readyState === 4) {
+			// for some reason this doesn't update unless it's wrapped in a function in setTimout
+			var checkAgain = setTimeout(function() {
+				checkSubstring();
+			},1);
+		}
+	}
 
 	checkSubstring();
-	// addXMLRequestCallback();
+	ajaxListener();
 });
