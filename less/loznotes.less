@@ -30,7 +30,8 @@
 
 // 2.0 variables
 // -----------------------------------------------------------------------------
-@brand-color:#6b2323;
+@color--brand:#6b2323;
+@color--highlight:spin(@color--brand, 180);
 
 // 3.0 general
 // -----------------------------------------------------------------------------
@@ -84,6 +85,17 @@
 	text-align:center;
 }
 
+.loznote__count--is-selected {
+	font-weight:bold;
+	color:#fff;		
+}
+
+.loznotes__anchor--is-selected {
+	a:link, a:visited, a:hover {
+		.loznote__count--is-selected;
+	}
+}
+
 .loznotes__page-description, .loznote__body {
 	.font-size(14,20);
 }
@@ -94,23 +106,39 @@
 
 // 6.0 modules
 // -----------------------------------------------------------------------------
-.loznotes__anchor a, .loznote__count {
+.loznote__count {
 	@color:rgba(0,0,0,.35);
 	display:block;
 	width:32px;
 	height:32px;
-	// z-index:95;
-	background:@brand-color;
+	background:@color--brand;
 	.radius(16);
 	cursor:pointer;
 	.shadow(0px,2px,3px,@color);
 	.box-sizing;
 }
 
+.loznotes__anchor { 
+	a:link, a:visited, a:hover {
+		.loznote__count;
+	}
+}
+
 .loznotes__anchor {
 	position:absolute;
 	.margin(-8,0,0,-8);
 }
+
+.loznote__count--is-selected {
+	background:@color--highlight;
+}
+
+.loznotes__anchor--is-selected {
+	a:link, a:visited, a:hover {
+		.loznote__count--is-selected;
+	}
+} 
+
 
 .loznotes__tab-pane, .loznotes__tab-control {
 	position:fixed;
@@ -129,14 +157,14 @@
 	width:32px;
 	height:24px;
 	margin-left:-16px;
-    background:url(../img/notes-h.png) center center no-repeat @brand-color;	
+    background:url(../img/notes-h.png) center center no-repeat @color--brand;	
 	.radius(@radius,@radius,0,0);	
 	-webkit-transition:@transition-bottom;
 	-moz-transition:@transition-bottom;
 	-o-transition:@transition-bottom;
 	transition:@transition-bottom;
 	&--is-active {
-		bottom:340px;
+		bottom:320px;
 	}
 	@media (min-width:@small-medium) {
 		&--is-active {
@@ -151,7 +179,7 @@
 		width:17px;
 		height:32px;
 		.margin-top(-16);
-	    background:url(../img/notes-v.png) center center no-repeat @brand-color;
+	    background:url(../img/notes-v.png) center center no-repeat @color--brand;
 		.radius(@radius,0,0,@radius);
 		opacity:.90;
 		-webkit-transition:@transition-right;
@@ -167,13 +195,13 @@
 .loznotes__tab-pane {
 	top:auto;
 	right:auto;
-	bottom:-336px;
+	bottom:-316px;
 	width:100%;
 	max-width:100%;
-	height:340px;
+	height:320px;
 	background:#000;
 	.padding(10,10,10,10);
-	border-top:4px solid @brand-color;
+	border-top:4px solid @color--brand;
 	overflow-y:scroll;
 	-webkit-overflow-scrolling:touch;
 	.box-sizing;
@@ -198,7 +226,7 @@
 		height:100%;
 		.padding(20,20,20,20);
 		border:none;
-		border-left:4px solid @brand-color;
+		border-left:4px solid @color--brand;
 		opacity:.90;
 		overflow:auto;
 		.box-sizing;
@@ -236,6 +264,7 @@
 .loznote__body {
 	display:block;
 	.margin-bottom(24);
+	.padding-top(5);
 	padding-left:44px;
 }
 

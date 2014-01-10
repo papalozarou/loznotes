@@ -13,12 +13,19 @@
 // -----------------------------------------------------------------------------
 $(function () {
 	// some global variables
-	var notes;
-	var bodyNote;
+	var notes,
+		bodyNote;
 
-	var notesTabControl;
-	var notesTabPane;
-	var notesAnchors;
+	var notesTabControl,
+		notesTabPane,
+		notesAnchors,
+		notesCounts;
+	
+	var anchorHidden = 'loznotes__anchor--is-hidden',
+		anchorSelected = 'loznotes__anchor--is-selected',
+		countSelected = 'loznote__count--is-selected',
+		tabControlActive = 'loznotes__tab-control--is-active',
+		tabPaneActive = 'loznotes__tab-pane--is-active';
 
 	// check substring and create notes	
 	function checkSubstring() {
@@ -61,8 +68,10 @@ $(function () {
 		createNotesTab();
 		createNoteAnchors();
 	
-		// grab inserted note anchors
+		// grab inserted note anchors and counts for later use
 		notesAnchors = $('.loznotes__anchor a');
+		notesCounts = $('.loznote__count');
+		
 	}
 
 	// check if the notations and tab pane already exist, if so remove	
@@ -135,21 +144,14 @@ $(function () {
 
 	// hhide note anchors by default
 	function hideNotes() {
-		notesAnchors.parent().addClass('loznotes__anchor--is-hidden');
+		notesAnchors.parent().addClass(anchorHidden);
 	}
 	
 	// note anchor click function
 	function interactionAnchors(){
 		// open tab pane
 		$(notesAnchors).click(function (e) {
-			toggleClass();
-
-			// don't scroll within tab if first note is clicked/tapped	
-			if (this.hash == '#loznote--1') {
-				notesTabPane.scrollTop(0);
-			} else {
-				notesTabPane.scrollTop($(this.hash).position().top - 20);
-			}
+			addRemoveClasses(this);
 			
 			e.preventDefault();
 		});
@@ -157,9 +159,17 @@ $(function () {
 
 	// note tab control click function
 	function interactionTabControl(){
-		// open tab pane
+		// toggle tab pane based on if an anchor is selected
 		$(notesTabControl).click(function (e) {
-			toggleClass();
+			// grab the currently selected anchor if there is one
+			var selectedAnchor = $('.loznotes__anchor--is-selected a');
+			
+			// if there is a currently selected anchor, remove class from anchor and corresponding count
+			if (selectedAnchor) {
+				removeAnchorCountClass(selectedAnchor);
+			}
+
+			toggleTabClass();
 			
 			// reset scroll top in case opened at anchor
 			notesTabPane.scrollTop(0);
@@ -171,13 +181,82 @@ $(function () {
 	// turn note anchors on or off
 	function interactionForm(){
 		$('#loznotes__form__display-toggle').click(function () {
-			notesAnchors.parent().toggleClass('loznotes__anchor--is-hidden');
+			notesAnchors.parent().toggleClass(anchorHidden);
 		});
 	}
 	
-	function toggleClass(){
-		notesTabControl.toggleClass('loznotes__tab-control--is-active');
-		notesTabPane.toggleClass('loznotes__tab-pane--is-active');
+	// sorts out highlight classes for note anchors and counts
+	function addRemoveClasses(newAnchor) {
+		// grab the currently selected anchor if there is one
+		var selectedAnchor = $('.loznotes__anchor--is-selected a');
+		
+		var newAnchorHash = newAnchor.hash;
+
+		// test to see if there is a current anchor or not
+		if (selectedAnchor[0]) {
+			// if there is, decide if the clicked anchor is already selected or not
+			if ($(newAnchor).parent().hasClass(anchorSelected)) {
+				removeAnchorCountClass();
+
+				closeTab();
+
+				// reset scrollTop of tab
+			} else {
+				removeAnchorCountClass();
+
+				addAnchorCountClass(newAnchor);
+
+				openTab();
+
+				scrollToAnchor(newAnchorHash);
+			}
+		} else {
+			addAnchorCountClass(newAnchor);
+
+			openTab();
+
+			scrollToAnchor(newAnchorHash);
+		}
+	}
+	
+	// add classes to anchor and count
+	function addAnchorCountClass(anchor) {
+		$(anchor).parent().addClass(anchorSelected);
+		$(anchor.hash).addClass(countSelected);
+	}
+	
+	// remove classes from anchor and count
+	function removeAnchorCountClass() {
+		notesAnchors.parent().removeClass(anchorSelected);
+		notesCounts.removeClass(countSelected);
+	}
+	
+	// simple function to open tab	
+	function openTab() {
+		notesTabControl.addClass(tabControlActive);
+		notesTabPane.addClass(tabPaneActive);
+	}
+
+	// simple function to close tab	
+	function closeTab() {
+		notesTabControl.removeClass(tabControlActive);
+		notesTabPane.removeClass(tabPaneActive);
+	}
+	
+	// toggle classes for tab	
+	function toggleTabClass(){
+		notesTabControl.toggleClass(tabControlActive);
+		notesTabPane.toggleClass(tabPaneActive);
+	}
+	
+	// checks the hash of the clicked note anchor and scrolls accordingly
+	function scrollToAnchor(theHash) {
+		// don't scroll within tab if first note is clicked/tapped	
+		if (theHash === '#loznote--1') {
+			notesTabPane.scrollTop(0);
+		} else {
+			notesTabPane.scrollTop($(theHash).position().top - 20);
+		}
 	}
 
 	checkSubstring();
