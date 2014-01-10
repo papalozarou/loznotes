@@ -31,7 +31,6 @@
 // 2.0 variables
 // -----------------------------------------------------------------------------
 @color--brand:#6b2323;
-// @color--highlight:#ffcb2f;
 @color--highlight:spin(@color--brand, 180);
 
 // 3.0 general
@@ -41,7 +40,7 @@
 // -----------------------------------------------------------------------------
 .loznotes__anchor {
 	text-align:center;
-	a:link {
+	a:link, a:visited, a:hover {
 		.font-size(14,32);
 		font-family:@sans-serif;
 		font-weight:bold;
@@ -86,9 +85,15 @@
 	text-align:center;
 }
 
-.loznote__anchor--is-selected a:link, .loznote__count--is-selected {
+.loznote__count--is-selected {
 	font-weight:bold;
-	color:#fff;
+	color:#fff;		
+}
+
+.loznotes__anchor--is-selected {
+	a:link, a:visited, a:hover {
+		.loznote__count--is-selected;
+	}
 }
 
 .loznotes__page-description, .loznote__body {
@@ -101,7 +106,7 @@
 
 // 6.0 modules
 // -----------------------------------------------------------------------------
-.loznotes__anchor a:link, .loznote__count {
+.loznote__count {
 	@color:rgba(0,0,0,.35);
 	display:block;
 	width:32px;
@@ -113,14 +118,27 @@
 	.box-sizing;
 }
 
+.loznotes__anchor { 
+	a:link, a:visited, a:hover {
+		.loznote__count;
+	}
+}
+
 .loznotes__anchor {
 	position:absolute;
 	.margin(-8,0,0,-8);
 }
 
-.loznote__anchor--is-selected a:link, .loznote__count--is-selected {
+.loznote__count--is-selected {
 	background:@color--highlight;
 }
+
+.loznotes__anchor--is-selected {
+	a:link, a:visited, a:hover {
+		.loznote__count--is-selected;
+	}
+} 
+
 
 .loznotes__tab-pane, .loznotes__tab-control {
 	position:fixed;

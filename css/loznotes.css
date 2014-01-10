@@ -18,7 +18,9 @@ br:last-child {
 .loznotes__anchor {
   text-align: center;
 }
-.loznotes__anchor a:link {
+.loznotes__anchor a:link,
+.loznotes__anchor a:visited,
+.loznotes__anchor a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
@@ -91,10 +93,16 @@ br:last-child {
   font-weight: bold;
   text-align: center;
 }
-.loznote__anchor--is-selected a:link,
 .loznote__count--is-selected {
   font-weight: bold;
   color: #fff;
+}
+.loznotes__anchor--is-selected a:link,
+.loznotes__anchor--is-selected a:visited,
+.loznotes__anchor--is-selected a:hover {
+  font-weight: bold;
+  color: #fff;
+  background: #236b6b;
 }
 .loznotes__page-description,
 .loznote__body {
@@ -103,7 +111,6 @@ br:last-child {
   line-height: 20px;
   line-height: 2rem;
 }
-.loznotes__anchor a:link,
 .loznote__count {
   display: block;
   width: 32px;
@@ -121,13 +128,45 @@ br:last-child {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.loznotes__anchor a:link,
+.loznotes__anchor a:visited,
+.loznotes__anchor a:hover {
+  font-size: 14px;
+  font-size: 1.4000000000000001rem;
+  line-height: 32px;
+  line-height: 3.2rem;
+  font-weight: bold;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  background: #6b2323;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  /* IE, Opera, W3C */
+  cursor: pointer;
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  display: block;
+}
 .loznotes__anchor {
   position: absolute;
   margin: -8px 0px 0px -8px;
   margin: -0.8rem 0px 0rem -8px;
 }
-.loznote__anchor--is-selected a:link,
 .loznote__count--is-selected {
+  background: #236b6b;
+}
+.loznotes__anchor--is-selected a:link,
+.loznotes__anchor--is-selected a:visited,
+.loznotes__anchor--is-selected a:hover {
+  font-weight: bold;
+  color: #fff;
   background: #236b6b;
 }
 .loznotes__tab-pane,
