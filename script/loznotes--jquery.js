@@ -11,7 +11,7 @@
 // jquery 2.x.x
 // loznotes.css
 // -----------------------------------------------------------------------------
-$(function () {
+var loznotes = (function () {
 	// some global variables
 	var notes,
 		bodyNote;
@@ -27,35 +27,7 @@ $(function () {
 		tabControlActive = 'loznotes__tab-control--is-active',
 		tabPaneActive = 'loznotes__tab-pane--is-active';
 
-	// check substring and create notes	
-	function checkSubstring() {
-		// get document URL and parse strings from first '?' character, 
-		// then split by '&'
-		var subStrings = window.location.search.substring(1).split('&');
 	
-		// check for switches
-		if ($.inArray('loznotes=hidden',subStrings) > -1 || $.inArray('loznotes=hide',subStrings) > -1) {
-			createNotes();
-		
-			hideNotes();
-		
-			interactionAnchors();
-			interactionTabControl();
-			interactionForm();
-		} else if ($.inArray('loznotes=off',subStrings) > -1) {
-			return false;
-		} else {
-			createNotes();
-
-			interactionAnchors();
-			interactionTabControl();
-			interactionForm();
-		
-			// show note anchors by default
-			$('#loznotes__form__display-toggle').attr('checked','checked');
-		}
-	}
-
 	// create notes and notation pane
 	function createNotes() {
 		checkExisting();
@@ -203,6 +175,7 @@ $(function () {
 				closeTab();
 
 				// reset scrollTop of tab
+				notesTabPane.scrollTop(0);
 			} else {
 				removeAnchorCountClass();
 
@@ -260,11 +233,43 @@ $(function () {
 			notesTabPane.scrollTop($(theHash).position().top - 20);
 		}
 	}
+	
+	return {
+		// check substring and create notes	
+		checkSubstring: function() {
+			// get document URL and parse strings from first '?' character, 
+			// then split by '&'
+			var subStrings = window.location.search.substring(1).split('&');
+	
+			// check for switches
+			if ($.inArray('loznotes=hidden',subStrings) > -1 || $.inArray('loznotes=hide',subStrings) > -1) {
+				createNotes();
+		
+				hideNotes();
+		
+				interactionAnchors();
+				interactionTabControl();
+				interactionForm();
+			} else if ($.inArray('loznotes=off',subStrings) > -1) {
+				return false;
+			} else {
+				createNotes();
 
-	checkSubstring();
+				interactionAnchors();
+				interactionTabControl();
+				interactionForm();
+		
+				// show note anchors by default
+				$('#loznotes__form__display-toggle').attr('checked','checked');
+			}
+		}
+	};
+})();
 
-	// if anything is loaded into the page via ajax, re-create the notes
-	$(document).ajaxComplete(function () {
-		checkSubstring();
-	});
+
+$(function () {
+	loznotes.checkSubstring();
 });
+
+// if anything is loaded into the page via ajax, re-create the notes
+$(document).ajaxComplete(loznotes.checkSubstring());
