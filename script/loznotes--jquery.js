@@ -266,10 +266,10 @@ var loznotes = (function () {
 	};
 })();
 
-
-$(function () {
-	loznotes.checkSubstring();
-});
+// run loznotes on document ready – using long hand version for consistency with below
+$(document).ready(loznotes.checkSubstring());
 
 // if anything is loaded into the page via ajax, re-create the notes
-$(document).ajaxComplete(loznotes.checkSubstring());
+$(document).ajaxComplete(function() {
+	loznotes.checkSubstring();
+});
