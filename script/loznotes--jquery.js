@@ -126,12 +126,14 @@ $(function () {
 
 	// generate notes list container within notes panel
 	function createNotesTabList() {
-		var notesList = $('<dl/>',{'class':'loznotes__list'}).appendTo(notesTabPane);
+		var notesList = $('<dl/>',{'class':'loznotes__list'});
 	
 		// number and add the notes to the note list
 		for (var i = 0; i < notes.length; i++) {
 			notesList.append('<dt id= "loznote--' + (i + 1) + '" class="loznote__count loznote__count-' + (i + 1) + '">' + (i + 1) + '</dt>' + '<dd class="loznote__body loznote__body-' + (i + 1) + '">' + $(notes[i]).data('notation') + '</dd>');
 		}
+		
+		notesList.appendTo(notesTabPane);
 	}
 	
 	// create the note anchors
