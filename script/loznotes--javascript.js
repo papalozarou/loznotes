@@ -24,6 +24,33 @@ var loznotes = (function() {
 		tabControlActive = 'loznotes__tab-control--is-active',
 		tabPaneActive = 'loznotes__tab-pane--is-active';
 		
+	// check substring and create notes	
+	function checkSubstring() {
+		// get document URL and parse strings from first '?' character, 
+		// then split by '&'
+		var subStrings = [].slice.call(location.search.substring(1).split('&'));
+
+		if (subStrings.indexOf('loznotes=hidden') > -1 || subStrings.indexOf('loznotes=hide') > -1) {
+			createNotes();
+
+			hideNotes();
+	
+			interactionAnchors();
+			interactionTabControl();
+			interactionForm();
+		} else if (subStrings.indexOf('loznotes=off') > -1) {
+			return false;
+		} else {
+			createNotes();
+
+			interactionAnchors();
+			interactionTabControl();
+			interactionForm();
+	
+			// show note anchors by default
+			document.querySelector('#loznotes__form__display-toggle').setAttribute('checked','checked');
+		}
+	}
 		
 	// create notes and notation pane
 	function createNotes() {
@@ -328,60 +355,34 @@ var loznotes = (function() {
 		}
 	}
 	
+	// hook in to ajax requests to update notes
+	function ajaxListener() {
+		// store open request;
+		var oldSend = XMLHttpRequest.prototype.send;
+	
+		XMLHttpRequest.prototype.send = function() {
+			this.addEventListener("readystatechange", checkReadyState);
+		
+			// run the real open
+			oldSend.apply(this,arguments);
+		};
+	}
+	
 	// check if readyState is complete
 	function checkReadyState() {
 		if (this.readyState === 4) {
 			// for some reason this doesn't update unless it's wrapped in a function in setTimout
 			var checkAgain = setTimeout(function() {
-				loznotes.checkSubstring();
+				checkSubstring();
 			},1);
 		}
 	}
 		
 	return {
-		// check substring and create notes	
-		checkSubstring: function() {
-			// get document URL and parse strings from first '?' character, 
-			// then split by '&'
-			var subStrings = [].slice.call(location.search.substring(1).split('&'));
-		
-			if (subStrings.indexOf('loznotes=hidden') > -1 || subStrings.indexOf('loznotes=hide') > -1) {
-				createNotes();
-		
-				hideNotes();
-			
-				interactionAnchors();
-				interactionTabControl();
-				interactionForm();
-			} else if (subStrings.indexOf('loznotes=off') > -1) {
-				return false;
-			} else {
-				createNotes();
-		
-				interactionAnchors();
-				interactionTabControl();
-				interactionForm();
-			
-				// show note anchors by default
-				document.querySelector('#loznotes__form__display-toggle').setAttribute('checked','checked');
-			}
-		},
-		
-		// hook in to ajax requests to update notes
-		ajaxListener: function() {
-			// store open request;
-			var oldSend = XMLHttpRequest.prototype.send;
-		
-			XMLHttpRequest.prototype.send = function() {
-				this.addEventListener("readystatechange", checkReadyState);
-			
-				// run the real open
-				oldSend.apply(this,arguments);
-			};
-		}
+		checkSubstring: checkSubstring,
+		ajaxListener: ajaxListener
 	};
 })();
 
-document.addEventListener('DOMContentLoaded',loznotes.checkSubstring);
-
+loznotes.checkSubstring();
 loznotes.ajaxListener();
