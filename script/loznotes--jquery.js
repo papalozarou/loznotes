@@ -11,7 +11,7 @@
 // jquery 2.x.x
 // loznotes.css
 // -----------------------------------------------------------------------------
-$(function () {
+var loznotes = (function () {
 	// some global variables
 	var notes,
 		bodyNote;
@@ -27,35 +27,7 @@ $(function () {
 		tabControlActive = 'loznotes__tab-control--is-active',
 		tabPaneActive = 'loznotes__tab-pane--is-active';
 
-	// check substring and create notes	
-	function checkSubstring() {
-		// get document URL and parse strings from first '?' character, 
-		// then split by '&'
-		var subStrings = window.location.search.substring(1).split('&');
 	
-		// check for switches
-		if ($.inArray('loznotes=hidden',subStrings) > -1 || $.inArray('loznotes=hide',subStrings) > -1) {
-			createNotes();
-		
-			hideNotes();
-		
-			interactionAnchors();
-			interactionTabControl();
-			interactionForm();
-		} else if ($.inArray('loznotes=off',subStrings) > -1) {
-			return false;
-		} else {
-			createNotes();
-
-			interactionAnchors();
-			interactionTabControl();
-			interactionForm();
-		
-			// show note anchors by default
-			$('#loznotes__form__display-toggle').attr('checked','checked');
-		}
-	}
-
 	// create notes and notation pane
 	function createNotes() {
 		checkExisting();
@@ -126,12 +98,14 @@ $(function () {
 
 	// generate notes list container within notes panel
 	function createNotesTabList() {
-		var notesList = $('<dl/>',{'class':'loznotes__list'}).appendTo(notesTabPane);
+		var notesList = $('<dl/>',{'class':'loznotes__list'});
 	
 		// number and add the notes to the note list
 		for (var i = 0; i < notes.length; i++) {
 			notesList.append('<dt id= "loznote--' + (i + 1) + '" class="loznote__count loznote__count-' + (i + 1) + '">' + (i + 1) + '</dt>' + '<dd class="loznote__body loznote__body-' + (i + 1) + '">' + $(notes[i]).data('notation') + '</dd>');
 		}
+		
+		notesList.appendTo(notesTabPane);
 	}
 	
 	// create the note anchors
@@ -201,6 +175,7 @@ $(function () {
 				closeTab();
 
 				// reset scrollTop of tab
+				notesTabPane.scrollTop(0);
 			} else {
 				removeAnchorCountClass();
 
@@ -258,11 +233,45 @@ $(function () {
 			notesTabPane.scrollTop($(theHash).position().top - 20);
 		}
 	}
+	
+	// check substring and create notes	
+	function checkSubstring() {
+		// get document URL and parse strings from first '?' character, 
+		// then split by '&'
+		var subStrings = window.location.search.substring(1).split('&');
 
-	checkSubstring();
+		// check for switches
+		if ($.inArray('loznotes=hidden',subStrings) > -1 || $.inArray('loznotes=hide',subStrings) > -1) {
+			createNotes();
+	
+			hideNotes();
+	
+			interactionAnchors();
+			interactionTabControl();
+			interactionForm();
+		} else if ($.inArray('loznotes=off',subStrings) > -1) {
+			return false;
+		} else {
+			createNotes();
 
-	// if anything is loaded into the page via ajax, re-create the notes
-	$(document).ajaxComplete(function () {
-		checkSubstring();
-	});
+			interactionAnchors();
+			interactionTabControl();
+			interactionForm();
+	
+			// show note anchors by default
+			$('#loznotes__form__display-toggle').attr('checked','checked');
+		}
+	}
+	
+	return {
+		checkSubstring: checkSubstring
+	};
+})();
+
+// run loznotes initially
+loznotes.checkSubstring();
+
+// if anything is loaded into the page via ajax, re-create the notes
+$(document).ajaxComplete(function() {
+	loznotes.checkSubstring();
 });
