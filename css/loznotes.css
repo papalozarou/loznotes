@@ -182,7 +182,7 @@ br:last-child {
   width: 32px;
   height: 24px;
   margin-left: -16px;
-  background: url(../img/notes-h.png) center center no-repeat #6b2323;
+  background: url('../img/notes-h.png') center center no-repeat #6b2323;
   -moz-border-radius: 3px 3px 0px 0px;
   -webkit-border-radius: 3px 3px 0px 0px;
   border-radius: 3px 3px 0px 0px;
@@ -210,7 +210,7 @@ br:last-child {
     height: 32px;
     margin-top: -16px;
     margin-top: -1.6rem;
-    background: url(../img/notes-v.png) center center no-repeat #6b2323;
+    background: url('../img/notes-v.png') center center no-repeat #6b2323;
     -moz-border-radius: 3px 0px 0px 3px;
     -webkit-border-radius: 3px 0px 0px 3px;
     border-radius: 3px 0px 0px 3px;

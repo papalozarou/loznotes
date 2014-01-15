@@ -13,9 +13,11 @@ In addition, switches have been added to enable defaulting to hidden anchors, or
 ##Installation & dependancies
 There are now two versions of loznotes to use, a vanilla javascript version and a jquery version.
 
-To use loznotes, simply add a link to "loznotes.css" inside your documents head and a link to the relevant jQuery/javascript file before the close of the body tag.
+To use loznotes, add a link to "loznotes.css" inside your documents head and a link to the relevant jQuery/javascript file before the close of the body tag.
 
-If you decided to use the jQuery version, you'll also need to include jQuery (http://jquery.com/download/) before referencing the "loznotes--jquery.min.js". Version 2.0.2 is included in the js/vendor folder for convenience.
+If you decided to use the jQuery version, you'll need to include jQuery (http://jquery.com/download/) before referencing the "loznotes--jquery.min.js". Version 2.0.2 is included in the js/vendor folder for convenience.
+
+The two .png files will need to be placed into your image folder – 'loznotes.less' contains a variable to change the path to these images.
 
 The index.html provides an example.
 
@@ -40,7 +42,7 @@ When content is pulled in through ajax calls there is an event listener on the d
 
 The enclosed index.html file provides more examples of usage and there is now [a live example from a recent client project](http://artfund-getinvolved-2013.lab7.co.uk/).
 
-If you'd like to change the red colour, or the highlight color, "loznotes.less" contains a two colour variables, **@color--brand** and **@color--highlight**, which you can change to whatever you need.
+If you'd like to change the red colour, or the highlight color, "loznotes.less" contains two colour variables, **@color--brand** and **@color--highlight**, which you can change to whatever you need.
 
 ##Switches
 It is now possible to hide the note anchors by default, or turn the notes off completely, via switches.
