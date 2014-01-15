@@ -17,7 +17,7 @@ To use loznotes, add a link to "loznotes.css" inside your documents head and a l
 
 If you decided to use the jQuery version, you'll need to include jQuery (http://jquery.com/download/) before referencing the "loznotes--jquery.min.js". Version 2.0.2 is included in the js/vendor folder for convenience.
 
-The two .png files will need to be placed into your image folder – 'loznotes.less' contains a variable to change the path to these images.
+The two .png files will need to be placed into your image folder – 'loznotes.less' contains a variable, **@path--images**, to change the path to these images.
 
 The index.html provides an example.
 
