@@ -115,6 +115,7 @@ br:last-child {
   display: block;
   width: 32px;
   height: 32px;
+  padding: 0;
   background: #6b2323;
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
@@ -138,6 +139,7 @@ br:last-child {
   text-align: center;
   width: 32px;
   height: 32px;
+  padding: 0;
   background: #6b2323;
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
