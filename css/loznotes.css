@@ -18,9 +18,9 @@ br:last-child {
 .loznotes__anchor {
   text-align: center;
 }
-.loznotes__anchor a:link,
-.loznotes__anchor a:visited,
-.loznotes__anchor a:hover {
+.loznotes__anchor > a:link,
+.loznotes__anchor > a:visited,
+.loznotes__anchor > a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
@@ -128,9 +128,9 @@ br:last-child {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.loznotes__anchor a:link,
-.loznotes__anchor a:visited,
-.loznotes__anchor a:hover {
+.loznotes__anchor > a:link,
+.loznotes__anchor > a:visited,
+.loznotes__anchor > a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
