@@ -18,9 +18,9 @@ br:last-child {
 .loznotes__anchor {
   text-align: center;
 }
-.loznotes__anchor > a:link,
-.loznotes__anchor > a:visited,
-.loznotes__anchor > a:hover {
+.loznotes__anchor a:link,
+.loznotes__anchor a:visited,
+.loznotes__anchor a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;
@@ -29,6 +29,26 @@ br:last-child {
   font-weight: bold;
   color: #fff;
   text-decoration: none;
+}
+[class]:link .loznotes__anchor a:link,
+[id]:link .loznotes__anchor a:link,
+[class]:visited .loznotes__anchor a:link,
+[id]:visited .loznotes__anchor a:link,
+[class]:hover .loznotes__anchor a:link,
+[id]:hover .loznotes__anchor a:link,
+[class]:link .loznotes__anchor a:visited,
+[id]:link .loznotes__anchor a:visited,
+[class]:visited .loznotes__anchor a:visited,
+[id]:visited .loznotes__anchor a:visited,
+[class]:hover .loznotes__anchor a:visited,
+[id]:hover .loznotes__anchor a:visited,
+[class]:link .loznotes__anchor a:hover,
+[id]:link .loznotes__anchor a:hover,
+[class]:visited .loznotes__anchor a:hover,
+[id]:visited .loznotes__anchor a:hover,
+[class]:hover .loznotes__anchor a:hover,
+[id]:hover .loznotes__anchor a:hover {
+  color: #fff;
 }
 .loznotes__tab-pane h1,
 .loznotes__tab-pane h2,
@@ -128,9 +148,9 @@ br:last-child {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.loznotes__anchor > a:link,
-.loznotes__anchor > a:visited,
-.loznotes__anchor > a:hover {
+.loznotes__anchor a:link,
+.loznotes__anchor a:visited,
+.loznotes__anchor a:hover {
   font-size: 14px;
   font-size: 1.4000000000000001rem;
   line-height: 32px;

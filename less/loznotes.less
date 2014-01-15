@@ -42,12 +42,22 @@
 // -----------------------------------------------------------------------------
 .loznotes__anchor {
 	text-align:center;
-	> a:link, > a:visited, > a:hover {
+	a:link, a:visited, a:hover {
 		.font-size(14,32);
 		font-family:@sans-serif;
 		font-weight:bold;
 		color:#fff;
 		text-decoration:none;
+	}
+}
+
+[class], [id] {
+	&:link, &:visited, &:hover {
+		.loznotes__anchor {
+			a:link, a:visited, a:hover {
+				color:#fff;
+			}
+		}
 	}
 }
 
@@ -121,7 +131,7 @@
 }
 
 .loznotes__anchor { 
-	> a:link, > a:visited, > a:hover {
+	a:link, a:visited, a:hover {
 		.loznote__count;
 	}
 }
