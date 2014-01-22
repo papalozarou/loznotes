@@ -27,6 +27,7 @@ br:last-child {
   line-height: 3.2rem;
   font-family: Helmet, Freesans, sans-serif;
   font-weight: bold;
+  font-style: normal;
   color: #fff;
   text-decoration: none;
 }
@@ -49,6 +50,7 @@ br:last-child {
 [class]:hover .loznotes__anchor a:hover,
 [id]:hover .loznotes__anchor a:hover {
   color: #fff;
+  font-style: normal;
 }
 .loznotes__tab-pane h1,
 .loznotes__tab-pane h2,
