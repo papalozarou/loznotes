@@ -52,6 +52,9 @@ br:last-child {
   color: #fff;
   font-style: normal;
 }
+.loznotes__tab-pane {
+	text-align:left;
+}
 .loznotes__tab-pane h1,
 .loznotes__tab-pane h2,
 .loznotes__tab-pane .loznotes__page-description,
