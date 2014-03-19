@@ -22,7 +22,7 @@ br:last-child {
 .loznotes__anchor a:visited,
 .loznotes__anchor a:hover {
   font-size: 14px;
-  font-size: 1.4000000000000001rem;
+  font-size: 1.4rem;
   line-height: 32px;
   line-height: 3.2rem;
   font-family: Helmet, Freesans, sans-serif;
@@ -53,7 +53,7 @@ br:last-child {
   font-style: normal;
 }
 .loznotes__tab-pane {
-	text-align:left;
+  text-align: left;
 }
 .loznotes__tab-pane h1,
 .loznotes__tab-pane h2,
@@ -69,9 +69,9 @@ br:last-child {
   font-size: 21px;
   font-size: 2.1rem;
   line-height: 24px;
-  line-height: 2.4000000000000004rem;
+  line-height: 2.4rem;
   margin-bottom: 12px;
-  margin-bottom: 1.2000000000000002rem;
+  margin-bottom: 1.2rem;
   padding: 0;
   background: none;
 }
@@ -82,16 +82,16 @@ br:last-child {
     line-height: 36px;
     line-height: 3.6rem;
     margin-bottom: 24px;
-    margin-bottom: 2.4000000000000004rem;
+    margin-bottom: 2.4rem;
   }
 }
 .loznotes__tab-pane h2 {
   font-size: 18px;
   font-size: 1.8rem;
   line-height: 24px;
-  line-height: 2.4000000000000004rem;
+  line-height: 2.4rem;
   margin-bottom: 12px;
-  margin-bottom: 1.2000000000000002rem;
+  margin-bottom: 1.2rem;
   background: none;
 }
 @media (min-width: 640px) {
@@ -99,20 +99,20 @@ br:last-child {
     font-size: 21px;
     font-size: 2.1rem;
     line-height: 24px;
-    line-height: 2.4000000000000004rem;
+    line-height: 2.4rem;
     margin-bottom: 24px;
-    margin-bottom: 2.4000000000000004rem;
+    margin-bottom: 2.4rem;
   }
 }
 .loznotes__tab-pane .loznotes__form {
   font-size: 14px;
-  font-size: 1.4000000000000001rem;
+  font-size: 1.4rem;
   line-height: 20px;
   line-height: 2rem;
 }
 .loznote__count {
   font-size: 14px;
-  font-size: 1.4000000000000001rem;
+  font-size: 1.4rem;
   line-height: 32px;
   line-height: 3.2rem;
   font-weight: bold;
@@ -132,9 +132,30 @@ br:last-child {
 .loznotes__page-description,
 .loznote__body {
   font-size: 14px;
-  font-size: 1.4000000000000001rem;
+  font-size: 1.4rem;
   line-height: 20px;
   line-height: 2rem;
+}
+.loznote__body a {
+  color: #ffdc52;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.loznote__body a:visited {
+  color: #ffeea8;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.loznote__body a:hover {
+  color: #fc0;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 .loznote__count {
   display: block;
@@ -157,7 +178,7 @@ br:last-child {
 .loznotes__anchor a:visited,
 .loznotes__anchor a:hover {
   font-size: 14px;
-  font-size: 1.4000000000000001rem;
+  font-size: 1.4rem;
   line-height: 32px;
   line-height: 3.2rem;
   font-weight: bold;
@@ -309,12 +330,12 @@ br:last-child {
 }
 .loznotes__form {
   margin-bottom: 12px;
-  margin-bottom: 1.2000000000000002rem;
+  margin-bottom: 1.2rem;
 }
 @media (min-width: 640px) {
   .loznotes__form {
     margin-bottom: 24px;
-    margin-bottom: 2.4000000000000004rem;
+    margin-bottom: 2.4rem;
   }
 }
 #loznotes__form__display-toggle {
@@ -322,7 +343,7 @@ br:last-child {
 }
 .loznotes__page-description {
   margin-bottom: 24px;
-  margin-bottom: 2.4000000000000004rem;
+  margin-bottom: 2.4rem;
   padding: 0;
 }
 .loznote__count {
@@ -332,7 +353,7 @@ br:last-child {
 .loznote__body {
   display: block;
   margin-bottom: 24px;
-  margin-bottom: 2.4000000000000004rem;
+  margin-bottom: 2.4rem;
   padding-top: 5px;
   padding-top: 0.5rem;
   padding-left: 44px;
