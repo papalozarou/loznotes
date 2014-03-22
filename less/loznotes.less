@@ -153,7 +153,12 @@
 
 .loznotes__anchor { 
 	a:link, a:visited, a:hover {
+		@transition-background:background .18s ease;
 		.loznote__count;
+		-webkit-transition:@transition-background;
+		-moz-transition:@transition-background;
+		-o-transition:@transition-background;
+		transition:@transition-background;
 	}
 }
 
