@@ -116,7 +116,7 @@ var loznotes = (function () {
 		}
 	}
 
-	// hhide note anchors by default
+	// hide note anchors by default
 	function hideNotes() {
 		notesAnchors.parent().addClass(anchorHidden);
 	}
