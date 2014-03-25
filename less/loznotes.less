@@ -40,7 +40,7 @@
 
 // 4.0 type
 // -----------------------------------------------------------------------------
-.loznotes__anchor {
+figure.loznotes__anchor {
 	text-align:center;
 	a:link, a:visited, a:hover {
 		.font-size(14,32);
@@ -49,23 +49,49 @@
 		font-style:normal;
 		color:#fff;
 		text-decoration:none;
+		text-indent:0;
+		background-image:none;
+	}
+	&--is-selected {
+		a:link, a:visited, a:hover {
+			font-weight:bold;
+			color:#fff;	
+		}
 	}
 }
 
 [class], [id] {
 	&:link, &:visited, &:hover {
-		.loznotes__anchor {
+		figure.loznotes__anchor {
 			a:link, a:visited, a:hover {
 				color:#fff;
 				font-style:normal;
+				text-indent:0;
+				background-image:none;
+			}
+		}
+		&--is-selected {
+			a:link, a:visited, a:hover {
+				font-weight:bold;
+				color:#fff;	
 			}
 		}
 	}
 }
 
-.loznotes__tab-pane {
+dt.loznote__count {
+	.font-size(14,32);
+	font-weight:bold;
+	text-align:center;
+	&--is-selected {
+		font-weight:bold;
+		color:#fff;		
+	}
+}
+
+section.loznotes__tab-pane {
 	text-align:left;
-	h1, h2, .loznotes__page-description, .loznote__count, .loznote__body, form {
+	h1, h2, p.loznotes__page-description, dt.loznote__count, dd.loznote__body, form.loznotes_form {
 		font-family:@sans-serif;
 		font-weight:normal;
 		color:#fff;	
@@ -89,33 +115,17 @@
 			.margin-bottom(24);
 		}
 	}
-	.loznotes__form {
+	form.loznotes__form {
 		.font-size(14,20);
+		color:#fff;
 	}
 }
 
-.loznote__count {
-	.font-size(14,32);
-	font-weight:bold;
-	text-align:center;
-}
-
-.loznote__count--is-selected {
-	font-weight:bold;
-	color:#fff;		
-}
-
-.loznotes__anchor--is-selected {
-	a:link, a:visited, a:hover {
-		.loznote__count--is-selected;
-	}
-}
-
-.loznotes__page-description, .loznote__body {
+p.loznotes__page-description, dd.loznote__body {
 	.font-size(14,20);
 }
 
-.loznote__body {
+dd.loznote__body {
 	a {
 		color:#ffdc52;
 		text-decoration:none;
@@ -139,8 +149,38 @@
 
 // 6.0 modules
 // -----------------------------------------------------------------------------
-.loznote__count {
+figure.loznotes__anchor { 
+	position:absolute;
+	.margin(-8,0,0,-8);
+	a:link, a:visited, a:hover {
+		@transition-background:background .18s ease;
+		@color:rgba(0,0,0,.35);
+		display:block;
+		width:32px;
+		height:32px;
+		padding:0;
+		background:@color--brand;
+		.radius(16);
+		.shadow(0px,2px,3px,@color);
+		.box-sizing;
+		-webkit-transition:@transition-background;
+		-moz-transition:@transition-background;
+		-o-transition:@transition-background;
+		transition:@transition-background;
+	}
+	&--is-selected {
+		a:link, a:visited, a:hover {
+			background:@color--highlight;
+		}
+	}
+	&--is-hidden {
+		display:none;
+	}
+}
+
+dt.loznote__count {
 	@color:rgba(0,0,0,.35);
+	float:left;
 	display:block;
 	width:32px;
 	height:32px;
@@ -149,36 +189,13 @@
 	.radius(16);
 	.shadow(0px,2px,3px,@color);
 	.box-sizing;
-}
-
-.loznotes__anchor { 
-	a:link, a:visited, a:hover {
-		@transition-background:background .18s ease;
-		.loznote__count;
-		-webkit-transition:@transition-background;
-		-moz-transition:@transition-background;
-		-o-transition:@transition-background;
-		transition:@transition-background;
+	&--is-selected {
+		background:@color--highlight;
 	}
 }
 
-.loznotes__anchor {
-	position:absolute;
-	.margin(-8,0,0,-8);
-}
 
-.loznote__count--is-selected {
-	background:@color--highlight;
-}
-
-.loznotes__anchor--is-selected {
-	a:link, a:visited, a:hover {
-		.loznote__count--is-selected;
-	}
-} 
-
-
-.loznotes__tab-pane, .loznotes__tab-control {
+section.loznotes__tab-pane, a.loznotes__tab-control {
 	position:fixed;
 	z-index:100;
 }
@@ -186,7 +203,7 @@
 @transition-bottom:bottom .2s ease;
 @transition-right:right .2s ease;
 
-.loznotes__tab-control {
+a.loznotes__tab-control {
 	@radius:3;
 	top:auto;
 	right:auto;
@@ -230,7 +247,7 @@
 	}
 }
 
-.loznotes__tab-pane {
+section.loznotes__tab-pane {
 	top:auto;
 	right:auto;
 	bottom:-316px;
@@ -278,34 +295,25 @@
 	}
 }
 
-.loznotes__form {
+form.loznotes__form {
 	.margin-bottom(12);
 	@media (min-width:@medium) {
 		.margin-bottom(24);
 	}
 }
 
-#loznotes__form__display-toggle {
+input#loznotes__form__display-toggle {
 	margin-right:5px;
 }
 
-.loznotes__page-description {
+p.loznotes__page-description {
 	.margin-bottom(24);
 	padding:0;
 }
 
-.loznote__count {
-	float:left;
-	display:block;
-}
-
-.loznote__body {
+dd.loznote__body {
 	display:block;
 	.margin-bottom(24);
 	.padding-top(5);
 	padding-left:44px;
-}
-
-.loznotes__anchor--is-hidden {
-	display:none;
 }
