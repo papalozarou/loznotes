@@ -152,6 +152,7 @@ section.loznotes__tab-pane form.loznotes__form {
   font-size: 1.4rem;
   line-height: 20px;
   line-height: 2rem;
+  font-family: Helmet, Freesans, sans-serif;
   color: #fff;
 }
 p.loznotes__page-description,
