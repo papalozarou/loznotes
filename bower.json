@@ -6,7 +6,7 @@
     "less/loznotes.less"
   ],
   "dependencies": {
-    "jquery": ">=2.0.2",
+    "jquery": ">=2.0.2"
   },
   "moduleType": [
     "globals"
@@ -22,11 +22,11 @@
     "prototypes",
     "prototyping"
   ],
-  "authors": [{
+  "authors": {
     "name": "Loz Gray",
     "email": "info@lozworld.com",
     "homepage": "http://lozworld.com",
-  }],
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/papalozarou/loznotes.git"
