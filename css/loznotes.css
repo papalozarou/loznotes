@@ -364,6 +364,8 @@ form.loznotes__form {
   }
 }
 input#loznotes__form__display-toggle {
+  -webkit-appearance:checkbox;
+  appearance:checkbox;
   margin-right: 5px;
 }
 p.loznotes__page-description {
