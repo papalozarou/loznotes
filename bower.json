@@ -22,17 +22,15 @@
     "prototypes",
     "prototyping"
   ],
-  "authors": [
-    {
-      "name": "Loz Gray",
-      "email": "info@lozworld.com",
-      "homepage": "http://lozworld.com",
-      "repository": {
-        "type": "git",
-        "url": "git://github.com/papalozarou/loznotes.git"
-      }
+  "authors": [{
+    "name": "Loz Gray",
+    "email": "info@lozworld.com",
+    "homepage": "http://lozworld.com",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/papalozarou/loznotes.git"
     }
-  ],
+  }],
   "license": "CC-BY-SA-3.0",
   "ignore": [
     "**/.*",
