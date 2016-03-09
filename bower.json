@@ -25,7 +25,7 @@
   "authors": {
     "name": "Loz Gray",
     "email": "info@lozworld.com",
-    "homepage": "http://lozworld.com",
+    "homepage": "http://lozworld.com"
   },
   "repository": {
     "type": "git",
@@ -37,5 +37,5 @@
     "script",
     "less",
     "config.codekit"
-  ],
+  ]
 }
