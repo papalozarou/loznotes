@@ -1,41 +1,38 @@
+
 {
-  "name": "loznotes",
-  "description": "loznotes is a notation layer for conveying information about wireframes, mockups and design comps.",
+  "name": "blue-leaf",
+  "description": "Physics-like animations for pretty particles",
   "main": [
-    "script/loznotes--jquery.js",
-    "less/loznotes.less"
+    "js/motion.js",
+    "sass/motion.scss"
   ],
   "dependencies": {
-    "jquery": ">=2.0.2"
+    "get-size": "~1.2.2",
+    "eventEmitter": "~4.2.11"
+  },
+  "devDependencies": {
+    "qunit": "~1.16.0"
   },
   "moduleType": [
-    "globals"
+    "amd",
+    "globals",
+    "node"
   ],
   "keywords": [
-    "annotation",
-    "notation",
-    "notation-layer",
-    "annotation-layer",
-    "wireframes",
-    "mockups",
-    "designs",
-    "prototypes",
-    "prototyping"
+    "motion",
+    "physics",
+    "particles"
   ],
-  "authors": {
-    "name": "Loz Gray",
-    "email": "info@lozworld.com",
-    "homepage": "http://lozworld.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/papalozarou/loznotes.git"
-  },
-  "license": "CC-BY-SA-3.0",
+  "authors": [
+    "Betty Beta <bbeta@example.com>"
+  ],
+  "license": "MIT",
   "ignore": [
     "**/.*",
-    "script",
-    "less",
-    "config.codekit"
-  ]
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true
 }
