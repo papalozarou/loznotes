@@ -185,6 +185,7 @@ dd.loznote__body a:hover {
 }
 figure.loznotes__anchor {
   position: absolute;
+  z-index:1000;
   margin: -8px 0px 0px -8px;
   margin: -0.8rem 0px 0rem -8px;
 }
