@@ -32,6 +32,9 @@
     "less",
     "config.codekit",
     "index.html",
-    "npm-debug.log"
+    "npm-debug.log",
+    "css/base.css",
+    "css/example.css",
+    "img/lozstrap__image--3x2.svg"
   ]
 }
