@@ -30,6 +30,8 @@
     "**/.*",
     "script",
     "less",
-    "config.codekit"
+    "config.codekit",
+    "index.html",
+    "npm-debug.log"
   ]
 }
